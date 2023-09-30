@@ -24,19 +24,25 @@ public class FPS_Controller : MonoBehaviour
 
     #region Input
     public void Shmoove(InputAction.CallbackContext ctx) {
-        movement = transform.rotation * new Vector3(ctx.ReadValue<Vector2>().x, 0, ctx.ReadValue<Vector2>().y);
+        float y = movement.y;
+        movement = new Vector3(ctx.ReadValue<Vector2>().x, 0, ctx.ReadValue<Vector2>().y);
+        movement.y = y;
     }
     public void Yump(InputAction.CallbackContext ctx) {
         if (ctx.performed && grounded) { movement.y = jumpStrength; grounded = false; }
     }
     #endregion
 
-    private void FixedUpdate()
+    private void Update()
     {
-        controller.Move(movement * Time.deltaTime * walkSpeed);
+        Vector3 xyMove = transform.rotation * movement;
+        xyMove.y = movement.y;
+        controller.Move(xyMove * Time.deltaTime * walkSpeed);
         movement.y = Mathf.Clamp(movement.y - Time.deltaTime * gravity, -10, 999);
+        if (grounded) { movement.y = -2; }
 
-        if(Physics.SphereCast(groundCheck.position, 0.5f, Vector3.zero, out RaycastHit hit, groundLayers) && movement.y < 0) {
+        Ray ray = new Ray(groundCheck.position, Vector3.down);
+        if(!grounded && Physics.SphereCast(ray, 0.5f, 1, groundLayers) && xyMove.y < 0) {
             grounded = true;
             movement.y = -2;
         }
