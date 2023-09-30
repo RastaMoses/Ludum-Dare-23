@@ -1504,7 +1504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 1369963644}
-  mouseSense: 50
+  mouseSense: 40
 --- !u!114 &1672996965
 MonoBehaviour:
   m_ObjectHideFlags: 0

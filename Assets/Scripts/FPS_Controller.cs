@@ -16,7 +16,7 @@ public class FPS_Controller : MonoBehaviour
     private CharacterController controller;
     private float currentSpeed;
     private int jumpCount = 2;
-    private bool canShoot = true, grinding = false, pounding = false, canDash = false;
+    private bool canShoot = true, grinding = false, pounding = false, canDash = false, grounded = true;
 
     private void Start()
     {
@@ -31,17 +31,20 @@ public class FPS_Controller : MonoBehaviour
         movement.y = y;
     }
     public void Yump(InputAction.CallbackContext ctx) {
-        if(ctx.performed && jumpCount == 2 && pounding) {
+        if(ctx.performed && grounded && pounding) {
+            Debug.Log("Pound jump");
             movement.y = jumpStrength * 2f;
             jumpCount--;
             grinding = false;
             canDash = true;
+            grounded = false;
         }
         if (ctx.performed && jumpCount > 0 && !pounding) { 
             movement.y = jumpStrength;
             jumpCount--;
             grinding = false;
             canDash = true;
+            grounded = false;
         }
     }
     public void Shoot(InputAction.CallbackContext ctx) { 
@@ -52,7 +55,7 @@ public class FPS_Controller : MonoBehaviour
     }
     public void Dash(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && canDash) { StartCoroutine(Dash(shotSpawn.forward)); }
+        if (ctx.performed && canDash && !grinding) { StartCoroutine(Dash(shotSpawn.forward)); }
     }
     public void Crouch(InputAction.CallbackContext ctx)
     {
@@ -72,7 +75,7 @@ public class FPS_Controller : MonoBehaviour
             controller.Move(grindDir * Time.deltaTime * currentSpeed);
         }
 
-        if(jumpCount < 2 && jumpCount >= 0) { movement.y = Mathf.Clamp(movement.y - Time.deltaTime * gravity, -10, 999); }
+        if(!grounded) { movement.y = Mathf.Clamp(movement.y - Time.deltaTime * gravity, -10, 999); }
     }
 
     public void BeginGrind(Vector3 railForward) {
@@ -90,10 +93,17 @@ public class FPS_Controller : MonoBehaviour
     }
 
     public void Ground() {
+        if(movement.y > 0) { return; }
         if (pounding) { StartCoroutine(PoundJump()); }
+        grounded = true;
         currentSpeed = walkSpeed;
         movement.y = -0.25f;
         jumpCount = 2;
+    }
+
+    public void UnGround() {
+        Debug.Log("CALLED");
+        grounded = false;
     }
 
     private IEnumerator Dash(Vector3 dashDir) {

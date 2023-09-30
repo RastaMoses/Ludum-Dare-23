@@ -10,4 +10,9 @@ public class GroundCheck : MonoBehaviour
     {
         if(other.gameObject != controller.gameObject) { controller.Ground(); }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject != controller.gameObject) { controller.UnGround(); }
+    }
 }
