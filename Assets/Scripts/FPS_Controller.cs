@@ -5,17 +5,17 @@ using UnityEngine.InputSystem;
 
 public class FPS_Controller : MonoBehaviour
 {
+    public Gun gun;
+    public Transform shotSpawn;
     public LayerMask groundLayers;
-    public float walkSpeed = 10;
-    public float grindSpeed = 15;
-    public float jumpStrength = 10f;
-    public float gravity = 10f;
+    public float walkSpeed = 10, grindSpeed = 15, jumpStrength = 10f, gravity = 10f;
 
     [SerializeField] Transform groundCheck;
 
-    private Vector3 movement = Vector2.zero;
+    private Vector3 movement = Vector3.zero, grindDir = Vector3.zero;
     private CharacterController controller;
-    private bool grounded = true;
+    private int jumpCount = 2;
+    private bool canShoot = true, grinding = false, pounding = false;
 
     private void Start()
     {
@@ -29,22 +29,74 @@ public class FPS_Controller : MonoBehaviour
         movement.y = y;
     }
     public void Yump(InputAction.CallbackContext ctx) {
-        if (ctx.performed && grounded) { movement.y = jumpStrength; grounded = false; }
+        if(ctx.performed && jumpCount == 2 && pounding) {
+            movement.y = jumpStrength * 2f;
+            jumpCount--;
+            grinding = false;
+        }
+        if (ctx.performed && jumpCount > 0 && !pounding) { 
+            movement.y = jumpStrength;
+            jumpCount--;
+            grinding = false;
+        }
+    }
+    public void Shoot(InputAction.CallbackContext ctx) { 
+        if(ctx.performed && canShoot) {
+            StartCoroutine(ShootCooldown());
+            Rail rail = Instantiate(gun.boolet, shotSpawn.position, shotSpawn.rotation).GetComponent<Rail>();
+        }
+    }
+    public void Dash(InputAction.CallbackContext ctx)
+    {
+
+    }
+    public void Crouch(InputAction.CallbackContext ctx)
+    {
+        if(jumpCount < 2 && ctx.performed) { pounding = true; movement.y = -6; }
     }
     #endregion
 
     private void Update()
     {
         Vector3 xyMove = transform.rotation * movement;
-        xyMove.y = movement.y;
-        controller.Move(xyMove * Time.deltaTime * walkSpeed);
-        movement.y = Mathf.Clamp(movement.y - Time.deltaTime * gravity, -10, 999);
-        if (grounded) { movement.y = -2; }
 
-        Ray ray = new Ray(groundCheck.position, Vector3.down);
-        if(!grounded && Physics.SphereCast(ray, 0.5f, 1, groundLayers) && xyMove.y < 0) {
-            grounded = true;
-            movement.y = -2;
+        if (!grinding) {
+            xyMove.y = movement.y;
+            controller.Move(xyMove * Time.deltaTime * walkSpeed);
         }
+        else {
+            controller.Move(grindDir * Time.deltaTime * grindSpeed);
+        }
+
+        if(jumpCount < 2 && jumpCount >= 0) { movement.y = Mathf.Clamp(movement.y - Time.deltaTime * gravity, -10, 999); }
+    }
+
+    public void BeginGrind(Vector3 railForward) {
+        if(movement.y > 0 || grinding) { return; }
+        jumpCount = 2;
+        Vector3 playerLook = transform.forward;
+        playerLook = new Vector3(playerLook.x, 0, playerLook.z);
+        playerLook.Normalize();
+        float dotProduct = Vector3.Dot(playerLook, railForward);
+        float angle = Mathf.Acos(dotProduct) * Mathf.Rad2Deg;
+        if (angle <= 90) { grindDir = railForward; }
+        else { grindDir = -railForward; }
+        grinding = true;
+    }
+
+    public void Ground() {
+        if (pounding) { StartCoroutine(PoundJump()); }
+        movement.y = -2;
+        jumpCount = 2;
+    }
+
+    private IEnumerator ShootCooldown() {
+        canShoot = false;
+        yield return new WaitForSeconds(gun.fireRate);
+        canShoot = true;
+    }
+    private IEnumerator PoundJump() {
+        yield return new WaitForSeconds(0.25f);
+        pounding = false;
     }
 }
