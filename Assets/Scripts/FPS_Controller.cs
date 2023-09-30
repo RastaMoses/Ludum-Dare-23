@@ -14,12 +14,14 @@ public class FPS_Controller : MonoBehaviour
 
     private Vector3 movement = Vector3.zero, grindDir = Vector3.zero;
     private CharacterController controller;
+    private float currentSpeed;
     private int jumpCount = 2;
-    private bool canShoot = true, grinding = false, pounding = false;
+    private bool canShoot = true, grinding = false, pounding = false, canDash = false;
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        currentSpeed = walkSpeed;
     }
 
     #region Input
@@ -33,22 +35,24 @@ public class FPS_Controller : MonoBehaviour
             movement.y = jumpStrength * 2f;
             jumpCount--;
             grinding = false;
+            canDash = true;
         }
         if (ctx.performed && jumpCount > 0 && !pounding) { 
             movement.y = jumpStrength;
             jumpCount--;
             grinding = false;
+            canDash = true;
         }
     }
     public void Shoot(InputAction.CallbackContext ctx) { 
         if(ctx.performed && canShoot) {
             StartCoroutine(ShootCooldown());
-            Rail rail = Instantiate(gun.boolet, shotSpawn.position, shotSpawn.rotation).GetComponent<Rail>();
+            Instantiate(gun.boolet, shotSpawn.position, shotSpawn.rotation).GetComponent<Rail>();
         }
     }
     public void Dash(InputAction.CallbackContext ctx)
     {
-
+        if (ctx.performed && canDash) { StartCoroutine(Dash(shotSpawn.forward)); }
     }
     public void Crouch(InputAction.CallbackContext ctx)
     {
@@ -62,10 +66,10 @@ public class FPS_Controller : MonoBehaviour
 
         if (!grinding) {
             xyMove.y = movement.y;
-            controller.Move(xyMove * Time.deltaTime * walkSpeed);
+            controller.Move(xyMove * Time.deltaTime * currentSpeed);
         }
         else {
-            controller.Move(grindDir * Time.deltaTime * grindSpeed);
+            controller.Move(grindDir * Time.deltaTime * currentSpeed);
         }
 
         if(jumpCount < 2 && jumpCount >= 0) { movement.y = Mathf.Clamp(movement.y - Time.deltaTime * gravity, -10, 999); }
@@ -73,6 +77,7 @@ public class FPS_Controller : MonoBehaviour
 
     public void BeginGrind(Vector3 railForward) {
         if(movement.y > 0 || grinding) { return; }
+        currentSpeed = grindSpeed;
         jumpCount = 2;
         Vector3 playerLook = transform.forward;
         playerLook = new Vector3(playerLook.x, 0, playerLook.z);
@@ -86,11 +91,22 @@ public class FPS_Controller : MonoBehaviour
 
     public void Ground() {
         if (pounding) { StartCoroutine(PoundJump()); }
-        Debug.Log("GRounded");
+        currentSpeed = walkSpeed;
         movement.y = -0.25f;
         jumpCount = 2;
     }
 
+    private IEnumerator Dash(Vector3 dashDir) {
+        float timer = 0;
+        float _speed = currentSpeed;
+        currentSpeed = 0;
+        while (timer < 0.15f) {
+            timer += Time.deltaTime;
+            controller.Move(dashDir * Time.deltaTime * 75);
+            yield return null;
+        }
+        currentSpeed = _speed;
+    }
     private IEnumerator ShootCooldown() {
         canShoot = false;
         yield return new WaitForSeconds(gun.fireRate);
