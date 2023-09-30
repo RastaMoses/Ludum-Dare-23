@@ -86,7 +86,8 @@ public class FPS_Controller : MonoBehaviour
 
     public void Ground() {
         if (pounding) { StartCoroutine(PoundJump()); }
-        movement.y = -2;
+        Debug.Log("GRounded");
+        movement.y = -0.25f;
         jumpCount = 2;
     }
 

@@ -8,6 +8,6 @@ public class GroundCheck : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        controller.Ground();
+        if(other.gameObject != controller.gameObject) { controller.Ground(); }
     }
 }
