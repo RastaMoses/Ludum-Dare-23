@@ -37,7 +37,7 @@ public class Rail : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if(other.tag == "Player") {
-            other.GetComponent<FPS_Controller>().BeginGrind(dir);
+            other.GetComponent<FPS_Controller>().BeginGrind(dir, lineRenderer.GetPosition(0), lineRenderer.GetPosition(1));
         }
     }
 }

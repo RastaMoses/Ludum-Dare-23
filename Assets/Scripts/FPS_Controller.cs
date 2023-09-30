@@ -2,19 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class FPS_Controller : MonoBehaviour
 {
     public Gun gun;
+    public GameObject meleePlatform;
+    public Image meleeChargeUI;
     public Transform shotSpawn;
     public LayerMask groundLayers;
     public float walkSpeed = 10, grindSpeed = 15, jumpStrength = 10f, gravity = 10f;
 
     [SerializeField] Transform groundCheck;
+    public Vector3 posChange = Vector3.zero;
 
     private Vector3 movement = Vector3.zero, grindDir = Vector3.zero;
+    private Vector2 endPos = new Vector2(999, 999);
     private CharacterController controller;
-    private float currentSpeed;
+    private float currentSpeed, barCharge = 1;
     private int jumpCount = 2;
     private bool canShoot = true, grinding = false, pounding = false, canDash = false, grounded = true;
 
@@ -32,7 +37,6 @@ public class FPS_Controller : MonoBehaviour
     }
     public void Yump(InputAction.CallbackContext ctx) {
         if(ctx.performed && grounded && pounding) {
-            Debug.Log("Pound jump");
             movement.y = jumpStrength * 2f;
             jumpCount--;
             grinding = false;
@@ -53,6 +57,15 @@ public class FPS_Controller : MonoBehaviour
             Instantiate(gun.boolet, shotSpawn.position, shotSpawn.rotation).GetComponent<Rail>();
         }
     }
+    public void Melee(InputAction.CallbackContext ctx) { 
+        if(ctx.performed && barCharge == 1) {
+            barCharge = 0;
+            Melee_Platform plat = FindObjectOfType<Melee_Platform>();
+            if (plat != null) { Destroy(plat.transform.root.gameObject); }
+            meleeChargeUI.fillAmount = 0;
+            Instantiate(meleePlatform, shotSpawn.position, shotSpawn.rotation);
+        }
+    }
     public void Dash(InputAction.CallbackContext ctx)
     {
         if (ctx.performed && canDash && !grinding) { StartCoroutine(Dash(shotSpawn.forward)); }
@@ -65,21 +78,34 @@ public class FPS_Controller : MonoBehaviour
 
     private void Update()
     {
+        if(Vector2.Distance(new Vector2(transform.position.x, transform.position.z), endPos) < 1) {
+            movement.y = jumpStrength * 1.25f;
+            jumpCount--;
+            grinding = false;
+            canDash = true;
+            grounded = false;
+            endPos = new Vector2(999, 999);
+        }
+
         Vector3 xyMove = transform.rotation * movement;
 
         if (!grinding) {
             xyMove.y = movement.y;
+            xyMove += posChange * currentSpeed;
             controller.Move(xyMove * Time.deltaTime * currentSpeed);
         }
         else {
             controller.Move(grindDir * Time.deltaTime * currentSpeed);
+            barCharge = Mathf.Clamp(barCharge + Time.deltaTime, 0, 1);
+            meleeChargeUI.fillAmount = barCharge;
         }
 
         if(!grounded) { movement.y = Mathf.Clamp(movement.y - Time.deltaTime * gravity, -10, 999); }
     }
 
-    public void BeginGrind(Vector3 railForward) {
-        if(movement.y > 0 || grinding) { return; }
+    public void BeginGrind(Vector3 railForward, Vector3 end1, Vector3 end2) {
+        if (movement.y > 0 || grinding) { return; }
+        #region Movement Calc
         currentSpeed = grindSpeed;
         jumpCount = 2;
         Vector3 playerLook = transform.forward;
@@ -89,9 +115,17 @@ public class FPS_Controller : MonoBehaviour
         float angle = Mathf.Acos(dotProduct) * Mathf.Rad2Deg;
         if (angle <= 90) { grindDir = railForward; }
         else { grindDir = -railForward; }
+        #endregion
+        #region EndCalc
+        dotProduct = Vector3.Dot(playerLook, end1.normalized);
+        angle = Mathf.Acos(dotProduct) * Mathf.Rad2Deg;
+        dotProduct = Vector3.Dot(playerLook, end2.normalized);
+        float angle2 = Mathf.Acos(dotProduct) * Mathf.Rad2Deg;
+        if(angle < angle2) { endPos = new Vector2(end1.x, end1.z); }
+        else { endPos = new Vector2(end2.x, end2.z); }
+        #endregion
         grinding = true;
     }
-
     public void Ground() {
         if(movement.y > 0) { return; }
         if (pounding) { StartCoroutine(PoundJump()); }
@@ -100,9 +134,7 @@ public class FPS_Controller : MonoBehaviour
         movement.y = -0.25f;
         jumpCount = 2;
     }
-
     public void UnGround() {
-        Debug.Log("CALLED");
         grounded = false;
     }
 
