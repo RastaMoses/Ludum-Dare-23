@@ -6,18 +6,19 @@ public class Artillery_Behaviour : MonoBehaviour
 {
     public float damage;
     public AnimationCurve curve;
-    public float fireRate;
+    public float fireRate, delay;
     public float attackDelay;
     public GameObject attackMesh;
     public Material attackMat;
 
     private GameObject showMesh, attack;
     private Transform target;
+    public GameObject bug;
 
     private void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        StartCoroutine(Attack());
+        StartCoroutine(Delay());
     }
 
     private void OnDestroy()
@@ -26,6 +27,18 @@ public class Artillery_Behaviour : MonoBehaviour
             Destroy(attack);
             Destroy(showMesh);
         }
+        for (int i = 0; i < 3; i++)
+        {
+            Vector3 spawn = Random.onUnitSphere;
+            spawn.y += 1;
+            HP _hp = Instantiate(bug, spawn, transform.rotation).GetComponent<HP>();
+            _hp.InvulnerableSpawn();
+        }
+    }
+
+private IEnumerator Delay() {
+        yield return new WaitForSeconds(delay);
+        StartCoroutine(Attack());
     }
 
     private IEnumerator Attack() {
@@ -41,6 +54,7 @@ public class Artillery_Behaviour : MonoBehaviour
 
     private IEnumerator AttackDelay() {
         float timer = 0;
+        GetComponent<SFX>().ArtileryShot();
         while(attack.transform.localScale.x != showMesh.transform.localScale.x) {
             timer += Time.deltaTime;
             attack.transform.localScale = Vector3.Lerp(Vector3.zero, showMesh.transform.localScale, curve.Evaluate(timer / attackDelay));

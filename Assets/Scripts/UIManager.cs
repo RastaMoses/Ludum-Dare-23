@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 public class UIManager : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class UIManager : MonoBehaviour
     [Header("Objectives")]
     [SerializeField] TextMeshProUGUI objectiveMain;
     [SerializeField] TextMeshProUGUI objectiveBonus;
+    [SerializeField] TextMeshProUGUI bonusPoints;
     [Header("Health")]
     [SerializeField] float debugHealth = 100;
     [SerializeField] float healthPicChangeThreshhold = 40;
@@ -132,6 +134,13 @@ public class UIManager : MonoBehaviour
     public void UpdateMultiplier(int multiplier)
     {
         scoreMultiplier.text = multiplier.ToString() + "X";
+    }
+
+    public void UpdateObjectives(string mainObjective, string bonusObjective, int bonusPointsAmount)
+    {
+        objectiveMain.text = mainObjective;
+        objectiveBonus.text = bonusObjective;
+        bonusPoints.text = "+" + bonusPointsAmount.ToString();
     }
 
     #endregion

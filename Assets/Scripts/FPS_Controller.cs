@@ -24,7 +24,7 @@ public class FPS_Controller : MonoBehaviour
     [HideInInspector] public float currentSpeed, barCharge = 1, dashCharge = 2, railCharge = 4, pointsCooldown = 0;
     [HideInInspector] public int score, multiplier = 1;
     private int jumpCount = 2;
-    private bool canShoot = true, grinding = false, pounding = false, canDash = false, grounded = true, canSlash = true;
+    private bool canShoot = true, grinding = false, pounding = false, canDash = false, grounded = true, canSlash = true, dashing = false;
     private SFX sfx;
 
     private void Start()
@@ -119,6 +119,7 @@ public class FPS_Controller : MonoBehaviour
     private void Update()
     {
         barCharge = Mathf.Clamp(barCharge + Time.deltaTime / 10, 0, 1);
+        railCharge = Mathf.Clamp(railCharge + Time.deltaTime / 20, 0, 4);
 
         //UI
         ui.UpdateGun(railCharge);
@@ -142,12 +143,12 @@ public class FPS_Controller : MonoBehaviour
 
         Vector3 xyMove = transform.rotation * movement;
 
-        if (!grinding) {
+        if (!grinding && !dashing) {
             xyMove.y = movement.y;
             xyMove += posChange * currentSpeed;
             controller.Move(xyMove * Time.deltaTime * currentSpeed);
         }
-        else {
+        else if (!dashing) {
             railCharge = Mathf.Clamp(railCharge + Time.deltaTime * 2, 0, 4);
             controller.Move(grindDir * Time.deltaTime * currentSpeed);
             barCharge = Mathf.Clamp(barCharge + Time.deltaTime, 0, 1);
@@ -199,14 +200,14 @@ public class FPS_Controller : MonoBehaviour
     private IEnumerator Dash(Vector3 dashDir) {
         float timer = 0;
         float _speed = currentSpeed;
-        currentSpeed = 0;
+        dashing = true;
         while (timer < 0.15f) {
             timer += Time.deltaTime;
             controller.Move(dashDir * Time.deltaTime * 75);
             yield return null;
         }
+        dashing = false;
         currentSpeed = _speed;
-        movement.y = 0;
     }
     private IEnumerator ShootCooldown() {
         canShoot = false;
