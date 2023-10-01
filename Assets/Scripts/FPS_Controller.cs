@@ -227,6 +227,7 @@ public class FPS_Controller : MonoBehaviour
         dashCharge = Mathf.Clamp(dashCharge + 1, 0, 2);
         railCharge = Mathf.Clamp(railCharge + 1, 0, 4);
         score = scoreValue * multiplier;
+        ui.UpdateScore(scoreValue * multiplier, score);
     }
     public void LoseMultiplier() { multiplier = 0; }
 }
