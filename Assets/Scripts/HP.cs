@@ -11,7 +11,7 @@ public class HP : MonoBehaviour
     public bool isPlayer = false;
     public TextMeshProUGUI text;
 
-    private int _currentHP;
+    private float _currentHP;
     private bool damagable = true;
     private Material[] defaultMat;
 
@@ -31,7 +31,7 @@ public class HP : MonoBehaviour
         if (!isPlayer) { GameObject.FindGameObjectWithTag("Player").transform.root.GetComponent<FPS_Controller>().Kill(); }
     }
 
-    public void TakeDamage(int damage) {
+    public void TakeDamage(float damage) {
         if (!damagable) { return; }
         damagable = false;
         _currentHP -= damage;

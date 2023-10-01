@@ -10,7 +10,7 @@ public class Rail : MonoBehaviour
     public LayerMask layerMask;
     public BoxCollider col;
     public Vector3 dir;
-    public float friendlyTime;
+    public float friendlyTime, damage;
 
     private LineRenderer lineRenderer;
     private bool damaged = true;
@@ -54,10 +54,10 @@ public class Rail : MonoBehaviour
             other.GetComponent<FPS_Controller>().BeginGrind(dir, lineRenderer.GetPosition(0), lineRenderer.GetPosition(1));
         }
         if(other.tag == "Player" && !friendly) {
-            other.GetComponent<HP>().TakeDamage(1);
+            other.GetComponent<HP>().TakeDamage(damage);
         }
         if(other.tag == "Enemy" && friendly && damaged && other.TryGetComponent<HP>(out HP _hp)) {
-            _hp.TakeDamage(1);
+            _hp.TakeDamage(damage);
             damaged = false;
         }
     }

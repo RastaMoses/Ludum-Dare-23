@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Artillery_Behaviour : MonoBehaviour
 {
+    public float damage;
     public AnimationCurve curve;
     public float fireRate;
     public float attackDelay;
@@ -48,7 +49,7 @@ public class Artillery_Behaviour : MonoBehaviour
 
         Collider[] colliders = Physics.OverlapSphere(attack.transform.position, attack.transform.localScale.x / 2);
         foreach(Collider col in colliders) { 
-            if(col.transform.root.TryGetComponent<HP>(out HP _hp)) { _hp.TakeDamage(3); }
+            if(col.transform.root.TryGetComponent<HP>(out HP _hp)) { _hp.TakeDamage(damage); }
             if(col.transform.root.TryGetComponent<Rail>(out Rail _rail)) { _rail.friendly = false; _rail.SetColor(new Color32(255, 0, 0, 255)); }
         }
 
