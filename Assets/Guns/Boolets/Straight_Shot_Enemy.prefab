@@ -165,7 +165,7 @@ MonoBehaviour:
   col: {fileID: 6733410975018143199}
   dir: {x: 0, y: 0, z: 0}
   friendlyTime: 0
-  damage: 10
+  damage: 5
 --- !u!54 &3452555423304693003
 Rigidbody:
   m_ObjectHideFlags: 0

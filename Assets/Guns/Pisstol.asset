@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: Pisstol
   m_EditorClassIdentifier: 
   boolet: {fileID: 204883345713966437, guid: ca33d3687d183c34ab0483aab95c4dac, type: 3}
-  fireRate: 0.2
-  shootsStraight: 0
+  fireRate: 0

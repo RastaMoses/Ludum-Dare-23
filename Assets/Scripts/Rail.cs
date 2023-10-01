@@ -18,6 +18,7 @@ public class Rail : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(Small());
         _friendlyTime = friendlyTime;
         lineRenderer = GetComponent<LineRenderer>();
 
@@ -69,5 +70,10 @@ public class Rail : MonoBehaviour
     public void SetDamaged(bool dmg) { damaged = dmg; }
     public void DecayLine(float amnt) {
         _friendlyTime -= amnt;
+    }
+
+    private IEnumerator Small() {
+        yield return new WaitForSeconds(0.1f);
+        col.size = new Vector3(1.5f, col.size.y, 1.5f);
     }
 }

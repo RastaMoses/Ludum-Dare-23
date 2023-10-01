@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class HP : MonoBehaviour
 {
@@ -9,7 +8,6 @@ public class HP : MonoBehaviour
     public Material matFlash;
     public int maxHP, value = 1;
     public bool isPlayer = false;
-    public TextMeshProUGUI text;
 
     private float _currentHP;
     private bool damagable = true;
@@ -33,11 +31,12 @@ public class HP : MonoBehaviour
 
     public void TakeDamage(float damage) {
         if (!damagable) { return; }
-        damagable = false;
         _currentHP -= damage;
-        if (isPlayer) { text.text = "HP: " + _currentHP; GetComponent<FPS_Controller>().LoseMultiplier(); }
+
+        if (isPlayer) { StartCoroutine(Invincibility()); GetComponent<FPS_Controller>().ui.UpdateHealth(_currentHP); GetComponent<FPS_Controller>().LoseMultiplier(); }
+        else { GetComponent<SFX>().EnemyHit(); }
         if(_currentHP <= 0) { Destroy(gameObject); }
-        StartCoroutine(Invincibility());
+        
         for (int i = 0; i < meshes.Length; i++)
         {
             meshes[i].material = matFlash;
@@ -53,7 +52,9 @@ public class HP : MonoBehaviour
         }
     }
 
-    IEnumerator Invincibility() {
+    IEnumerator Invincibility()
+    {
+        damagable = false;
         yield return new WaitForSeconds(1.5f);
         damagable = true;
     }

@@ -192,6 +192,7 @@ MonoBehaviour:
   col: {fileID: 6733410975018143199}
   dir: {x: 0, y: 0, z: 0}
   friendlyTime: 10
+  damage: 0
 --- !u!54 &3452555423304693003
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -251,5 +252,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 1.5, z: 1.5}
+  m_Size: {x: 3, y: 3, z: 3}
   m_Center: {x: 0, y: 0, z: 0}

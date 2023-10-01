@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class FPS_Controller : MonoBehaviour
 {
     public Gun gun;
+    public UIManager ui;
     public GameObject meleePlatform, slash;
-    public Image meleeChargeUI;
     public Transform shotSpawn;
     public LayerMask groundLayers;
     public float walkSpeed = 10, grindSpeed = 15, jumpStrength = 10f, gravity = 10f;
@@ -24,10 +23,12 @@ public class FPS_Controller : MonoBehaviour
     [HideInInspector] public int score, multiplier = 1;
     private int jumpCount = 2;
     private bool canShoot = true, grinding = false, pounding = false, canDash = false, grounded = true, canSlash = true;
+    private SFX sfx;
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        sfx = GetComponent<SFX>();
         currentSpeed = walkSpeed;
     }
 
@@ -74,7 +75,6 @@ public class FPS_Controller : MonoBehaviour
             barCharge = 0;
             Melee_Platform plat = FindObjectOfType<Melee_Platform>();
             if (plat != null) { Destroy(plat.transform.root.gameObject); }
-            meleeChargeUI.fillAmount = 0;
             Instantiate(meleePlatform, shotSpawn.position, shotSpawn.rotation);
         }
     }
@@ -84,6 +84,7 @@ public class FPS_Controller : MonoBehaviour
             grinding = false;
             dashCharge -= 1;
             StartCoroutine(Dash(shotSpawn.forward));
+            sfx.Dash();
         }
     }
     public void Crouch(InputAction.CallbackContext ctx)
@@ -98,6 +99,13 @@ public class FPS_Controller : MonoBehaviour
 
     private void Update()
     {
+        barCharge = Mathf.Clamp(barCharge + Time.deltaTime / 10, 0, 1);
+
+        //UI
+        ui.UpdateGun(railCharge);
+        ui.UpdatePlatform(barCharge);
+        ui.UpdateDash(dashCharge);
+
         pointsCooldown -= Time.deltaTime;
         if(pointsCooldown < 0) { multiplier = 1; }
 
@@ -120,10 +128,9 @@ public class FPS_Controller : MonoBehaviour
             controller.Move(xyMove * Time.deltaTime * currentSpeed);
         }
         else {
-            railCharge = Mathf.Clamp(railCharge + Time.deltaTime, 0, 4);
+            railCharge = Mathf.Clamp(railCharge + Time.deltaTime * 2, 0, 4);
             controller.Move(grindDir * Time.deltaTime * currentSpeed);
             barCharge = Mathf.Clamp(barCharge + Time.deltaTime, 0, 1);
-            meleeChargeUI.fillAmount = barCharge;
         }
 
         if(!grounded) { movement.y = Mathf.Clamp(movement.y - Time.deltaTime * gravity, -10, 999); }

@@ -13,9 +13,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] Image crosshair;
     [SerializeField] List<Image> dashes;
     [SerializeField] Image platformChargeSprite;
-    [SerializeField] Image platformSlider;
+    [SerializeField] public Image platformSlider;
     [SerializeField] List<Image> gunCharges;
-    [SerializeField] Image gunSlider;
+    [SerializeField] public Image gunSlider;
     [Header("Score")]
     [SerializeField] TextMeshProUGUI score;
     [SerializeField] TextMeshProUGUI scoreMultiplier;
@@ -30,23 +30,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] List<Sprite> healthBGs;
     [SerializeField] Image healthPic;
     [SerializeField] List<Sprite> healthPics;
-    [SerializeField] Image healthSlider;
+    [SerializeField] public Image healthSlider;
     [SerializeField] Color lowHealthBar;
     [SerializeField] TextMeshProUGUI lifes;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        UpdateHealth(debugHealth);
-        UpdateGun(debugGun);
-        UpdatePlatform(debugPlatform);
-    }
 
     #region Public Update Visuals Functions
     public void UpdateHealth(float currentHealth)
