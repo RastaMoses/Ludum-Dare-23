@@ -8,17 +8,7 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
     [SerializeField] List<Button> buttonsToDisable;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField] GameObject optionsMenu;
 
     public void Pause() 
     { 
@@ -39,6 +29,7 @@ public class PauseMenu : MonoBehaviour
         {
             button.interactable = false;
         }
+        optionsMenu.SetActive(true);
     }
 
     public void CloseOptions() 
@@ -47,5 +38,6 @@ public class PauseMenu : MonoBehaviour
         {
             button.interactable = true;
         }
+        optionsMenu?.SetActive(false);
     }
 }
