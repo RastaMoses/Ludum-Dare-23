@@ -34,8 +34,10 @@ public class HP : MonoBehaviour
         _currentHP -= damage;
 
         if (isPlayer) { StartCoroutine(Invincibility()); GetComponent<FPS_Controller>().ui.UpdateHealth(_currentHP); GetComponent<FPS_Controller>().LoseMultiplier(); }
-        else { GetComponent<SFX>().EnemyHit(); }
-        if(_currentHP <= 0) { Destroy(gameObject); }
+        else if (_currentHP > 0) { GetComponent<SFX>().EnemyHit(); }
+        else { GetComponent<SFX>().EnemyKill(); }
+
+        if (_currentHP <= 0) {  Destroy(gameObject); }
         
         for (int i = 0; i < meshes.Length; i++)
         {

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Rail : MonoBehaviour
 {
@@ -11,23 +12,25 @@ public class Rail : MonoBehaviour
     public BoxCollider col;
     public Vector3 dir;
     public float friendlyTime, damage;
+    public VisualEffect vfx;
 
-    private LineRenderer lineRenderer;
     private bool damaged = true;
     private float _friendlyTime;
+    private Vector3 hitPoint;
 
     private void Start()
     {
         StartCoroutine(Small());
         _friendlyTime = friendlyTime;
-        lineRenderer = GetComponent<LineRenderer>();
 
         //If shoots straight, get direction of line. Else, run ray-march algorithm
         if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 999, layerMask)) {
-            lineRenderer.SetPosition(0, transform.position);
-            lineRenderer.SetPosition(1, hit.point);
             dir = hit.point - transform.position;
+            vfx.transform.LookAt(hit.point);
+            vfx.transform.localEulerAngles = new Vector3(-90, -90, 0);
+            vfx.SetFloat("distance", Vector3.Distance(transform.position, hit.point));
             dir.Normalize();
+            hitPoint = hit.point;
             col.transform.position = (hit.point + transform.position) / 2;
             col.transform.localEulerAngles = new Vector3(90, 0, 0);
             col.size = new Vector3(col.size.x, Vector3.Distance(hit.point, transform.position), col.size.z);
@@ -43,16 +46,14 @@ public class Rail : MonoBehaviour
         if (friendly)
         {
             _friendlyTime -= Time.deltaTime;
-            lineRenderer.startColor = Color32.Lerp(evil, nice, curve.Evaluate(_friendlyTime / friendlyTime));
-            lineRenderer.endColor = Color32.Lerp(evil, nice, curve.Evaluate(_friendlyTime / friendlyTime));
-            if (_friendlyTime < 0) { friendly = false; }
+            if (_friendlyTime < 0) { friendly = false; SetColor(evil); }
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
         if(other.tag == "Player" && friendly) {
-            other.GetComponent<FPS_Controller>().BeginGrind(dir, lineRenderer.GetPosition(0), lineRenderer.GetPosition(1));
+            other.GetComponent<FPS_Controller>().BeginGrind(dir, transform.position, hitPoint);
         }
         if(other.tag == "Player" && !friendly) {
             other.GetComponent<HP>().TakeDamage(damage);
@@ -64,8 +65,7 @@ public class Rail : MonoBehaviour
     }
 
     public void SetColor(Color32 colour) {
-        lineRenderer.startColor = colour;
-        lineRenderer.endColor = colour;
+        vfx.SetVector4("color", new Vector4(colour.r, colour.g, colour.b, colour.a));
     }
     public void SetDamaged(bool dmg) { damaged = dmg; }
     public void DecayLine(float amnt) {

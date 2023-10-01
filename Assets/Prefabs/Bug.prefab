@@ -397,7 +397,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &8710151745597930142
 Rigidbody:
@@ -432,6 +432,14 @@ MonoBehaviour:
     type: 3}
   dashFX: {fileID: 0}
   enemyHit: {fileID: 8300000, guid: a2ddfe0bc3c3f3d4d9825c612738c719, type: 3}
+  enemyKill: {fileID: 8300000, guid: e33869879065d5749ae74dc9ba60ba9b, type: 3}
+  healthPickup: {fileID: 0}
+  melee: {fileID: 0}
+  railGrind: {fileID: 0}
+  shotRecovered: {fileID: 0}
+  gunEmpty: {fileID: 0}
+  railGunShot: {fileID: 0}
+  randomShot: []
 --- !u!82 &-5590105879520377030
 AudioSource:
   m_ObjectHideFlags: 0

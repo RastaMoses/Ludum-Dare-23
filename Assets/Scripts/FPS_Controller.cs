@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.VFX;
 
 public class FPS_Controller : MonoBehaviour
 {
@@ -14,7 +15,8 @@ public class FPS_Controller : MonoBehaviour
 
     [SerializeField] Transform groundCheck;
     public Vector3 posChange = Vector3.zero;
-
+    public Animator rightHand, leftHand;
+    public VisualEffect vfx;
 
     private Vector3 movement = Vector3.zero, grindDir = Vector3.zero;
     private Vector2 endPos = new Vector2(999, 999);
@@ -42,6 +44,7 @@ public class FPS_Controller : MonoBehaviour
         if(ctx.performed && grounded && pounding) {
             movement.y = jumpStrength * 2f;
             jumpCount--;
+            sfx.RailGrind(false);
             grinding = false;
             canDash = true;
             grounded = false;
@@ -49,6 +52,7 @@ public class FPS_Controller : MonoBehaviour
         if (ctx.performed && jumpCount > 0 && !pounding) { 
             movement.y = jumpStrength;
             jumpCount--;
+            sfx.RailGrind(false);
             grinding = false;
             canDash = true;
             grounded = false;
@@ -56,14 +60,21 @@ public class FPS_Controller : MonoBehaviour
     }
     public void Shoot(InputAction.CallbackContext ctx) { 
         if(ctx.performed && canShoot && railCharge >= 1) {
+            vfx.SendEvent("OnPlay");
+            rightHand.SetTrigger("shoot");
+            sfx.Shoot();
             railCharge -= 1;
             StartCoroutine(ShootCooldown());
             Instantiate(gun.boolet, shotSpawn.position, shotSpawn.rotation);
         }
+        else if(railCharge < 1) { sfx.GunEmpty(); }
     }
     public void Melee(InputAction.CallbackContext ctx) {
         if (ctx.performed && canSlash)
         {
+            rightHand.SetTrigger("slash");
+            leftHand.SetTrigger("slash");
+            sfx.Melee();
             canSlash = false;
             StartCoroutine(SlashCooldown());
             Instantiate(slash, shotSpawn.position, shotSpawn.rotation);
@@ -81,6 +92,10 @@ public class FPS_Controller : MonoBehaviour
     public void Dash(InputAction.CallbackContext ctx)
     {
         if (ctx.performed && canDash && dashCharge >= 1) {
+            rightHand.SetTrigger("dash");
+            leftHand.SetTrigger("dash");
+            sfx.Dash();
+            sfx.RailGrind(false);
             grinding = false;
             dashCharge -= 1;
             StartCoroutine(Dash(shotSpawn.forward));
@@ -90,6 +105,8 @@ public class FPS_Controller : MonoBehaviour
     public void Crouch(InputAction.CallbackContext ctx)
     {
         if((jumpCount < 2 && ctx.performed) || (grinding && ctx.performed)) {
+            sfx.RailGrind(false);
+            rightHand.SetBool("pound", true);
             grinding = false;
             pounding = true; 
             movement.y = -6; 
@@ -114,6 +131,7 @@ public class FPS_Controller : MonoBehaviour
         if(Vector2.Distance(new Vector2(transform.position.x, transform.position.z), endPos) < 1) {
             movement.y = jumpStrength * 0.5f;
             jumpCount--;
+            sfx.RailGrind(false);
             grinding = false;
             canDash = true;
             grounded = false;
@@ -157,6 +175,7 @@ public class FPS_Controller : MonoBehaviour
         if(angle < angle2) { endPos = new Vector2(end1.x, end1.z); }
         else { endPos = new Vector2(end2.x, end2.z); }
         #endregion
+        sfx.RailGrind(true);
         grinding = true;
     }
     public void Ground() {
@@ -193,11 +212,13 @@ public class FPS_Controller : MonoBehaviour
         canShoot = true;
     }
     private IEnumerator PoundJump() {
+        rightHand.SetBool("pound", false);
         yield return new WaitForSeconds(0.25f);
         pounding = false;
     }
     public void Launch() {
         movement.y = jumpStrength * 1.25f;
+        sfx.RailGrind(false);
         grinding = false;
     }
     public void Kill(int scoreValue) {

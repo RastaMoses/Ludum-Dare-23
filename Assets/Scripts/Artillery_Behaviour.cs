@@ -46,7 +46,7 @@ public class Artillery_Behaviour : MonoBehaviour
             attack.transform.localScale = Vector3.Lerp(Vector3.zero, showMesh.transform.localScale, curve.Evaluate(timer / attackDelay));
             yield return null;
         }
-
+        GetComponent<SFX>().RandomShot();
         Collider[] colliders = Physics.OverlapSphere(attack.transform.position, attack.transform.localScale.x / 2);
         foreach(Collider col in colliders) { 
             if(col.transform.root.TryGetComponent<HP>(out HP _hp)) { _hp.TakeDamage(damage); }

@@ -37,6 +37,7 @@ public class Turret : MonoBehaviour
             if (timer >= shotSpeed)
             {
                 Instantiate(bullet, shotSpawn.position, shotSpawn.rotation);
+                GetComponent<SFX>().RandomShot();
                 timer = 0;
             }
         }

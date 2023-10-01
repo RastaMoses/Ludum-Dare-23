@@ -6,8 +6,10 @@ public class SFX : MonoBehaviour
 {
     public bool master = false;
     public GameObject sfxObject;
-    public AudioClip dashFX, enemyHit;
+    public AudioClip dashFX, enemyHit, enemyKill, healthPickup, melee, railGrind, shotRecovered, gunEmpty, railGunShot;
+    public AudioClip[] randomShot;
 
+    private GameObject persistant;
 
     private void Start()
     {
@@ -18,12 +20,52 @@ public class SFX : MonoBehaviour
     }
 
     public void Dash() {
-        SFX _sfx = Instantiate(sfxObject, transform).GetComponent<SFX>();
+        SFX _sfx = Instantiate(sfxObject, transform.position, transform.rotation).GetComponent<SFX>();
         _sfx.GetComponent<AudioSource>().clip = dashFX;
     }
-    public void EnemyHit() {
-        SFX _sfx = Instantiate(sfxObject, transform).GetComponent<SFX>();
+    public void EnemyHit()
+    {
+        SFX _sfx = Instantiate(sfxObject, transform.position, transform.rotation).GetComponent<SFX>();
         _sfx.GetComponent<AudioSource>().clip = enemyHit;
+    }
+    public void EnemyKill()
+    {
+        SFX _sfx = Instantiate(sfxObject, transform.position, transform.rotation).GetComponent<SFX>();
+        _sfx.GetComponent<AudioSource>().clip = enemyKill;
+    }
+    public void Shoot() {
+        SFX _sfx = Instantiate(sfxObject, transform.position, transform.rotation).GetComponent<SFX>();
+        _sfx.GetComponent<AudioSource>().clip = railGunShot;
+    }
+    public void EnemyHealthPickup()
+    {
+        SFX _sfx = Instantiate(sfxObject, transform.position, transform.rotation).GetComponent<SFX>();
+        _sfx.GetComponent<AudioSource>().clip = healthPickup;
+    }
+    public void Melee()
+    {
+        SFX _sfx = Instantiate(sfxObject, transform.position, transform.rotation).GetComponent<SFX>();
+        _sfx.GetComponent<AudioSource>().clip = melee;
+    }
+    public void RailGrind(bool onRail)
+    {
+        if (onRail) { persistant = Instantiate(sfxObject, transform.position, transform.rotation); persistant.GetComponent<AudioSource>().clip = railGrind; }
+        else { Destroy(persistant); }
+    }
+    public void ShotRecovered()
+    {
+        SFX _sfx = Instantiate(sfxObject, transform.position, transform.rotation).GetComponent<SFX>();
+        _sfx.GetComponent<AudioSource>().clip = shotRecovered;
+    }
+    public void GunEmpty()
+    {
+        SFX _sfx = Instantiate(sfxObject, transform.position, transform.rotation).GetComponent<SFX>();
+        _sfx.GetComponent<AudioSource>().clip = gunEmpty;
+    }
+    public void RandomShot() {
+        SFX _sfx = Instantiate(sfxObject, transform.position, transform.rotation).GetComponent<SFX>();
+        int r = Random.Range(0, randomShot.Length);
+        _sfx.GetComponent<AudioSource>().clip = randomShot[r];
     }
 
     private IEnumerator Kill(float time) {
