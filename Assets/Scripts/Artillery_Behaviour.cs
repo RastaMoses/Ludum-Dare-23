@@ -54,6 +54,7 @@ private IEnumerator Delay() {
 
     private IEnumerator AttackDelay() {
         float timer = 0;
+        GetComponent<SFX>().ArtileryShot();
         while(attack.transform.localScale.x != showMesh.transform.localScale.x) {
             timer += Time.deltaTime;
             attack.transform.localScale = Vector3.Lerp(Vector3.zero, showMesh.transform.localScale, curve.Evaluate(timer / attackDelay));
