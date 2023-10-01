@@ -4,29 +4,31 @@ using UnityEngine;
 
 public class Rail : MonoBehaviour
 {
-    public bool isStraight;
+    public bool friendly;
+    public Color32 nice, evil;
     public LayerMask layerMask;
     public BoxCollider col;
-
-    private List<Vector3> positions = new List<Vector3>(0);
     public Vector3 dir;
+    public float friendlyTime;
+
     private LineRenderer lineRenderer;
+    private bool damaged = true;
+    private float _friendlyTime;
 
     private void Start()
     {
+        _friendlyTime = friendlyTime;
         lineRenderer = GetComponent<LineRenderer>();
 
         //If shoots straight, get direction of line. Else, run ray-march algorithm
         if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 999, layerMask)) {
-            if (isStraight) {
-                lineRenderer.SetPosition(0, transform.position);
-                lineRenderer.SetPosition(1, hit.point);
-                dir = hit.point - transform.position;
-                dir.Normalize();
-                col.transform.position = (hit.point + transform.position) / 2;
-                col.transform.localEulerAngles = new Vector3(90, 0, 0);
-                col.size = new Vector3(1, Vector3.Distance(hit.point, transform.position), 1);
-            }
+            lineRenderer.SetPosition(0, transform.position);
+            lineRenderer.SetPosition(1, hit.point);
+            dir = hit.point - transform.position;
+            dir.Normalize();
+            col.transform.position = (hit.point + transform.position) / 2;
+            col.transform.localEulerAngles = new Vector3(90, 0, 0);
+            col.size = new Vector3(col.size.x, Vector3.Distance(hit.point, transform.position), col.size.z);
         }
         else
         {
@@ -34,10 +36,28 @@ public class Rail : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (friendly)
+        {
+            _friendlyTime -= Time.deltaTime;
+            lineRenderer.startColor = Color32.Lerp(evil, nice, _friendlyTime / friendlyTime);
+            lineRenderer.endColor = Color32.Lerp(evil, nice, _friendlyTime / friendlyTime);
+            if (_friendlyTime < 0) { friendly = false; }
+        }
+    }
+
     private void OnTriggerStay(Collider other)
     {
-        if(other.tag == "Player") {
+        if(other.tag == "Player" && friendly) {
             other.GetComponent<FPS_Controller>().BeginGrind(dir, lineRenderer.GetPosition(0), lineRenderer.GetPosition(1));
+        }
+        if(other.tag == "Player" && !friendly) {
+            other.GetComponent<HP>().TakeDamage(1);
+        }
+        if(other.tag == "Enemy" && friendly && damaged && other.TryGetComponent<HP>(out HP _hp)) {
+            _hp.TakeDamage(1);
+            damaged = false;
         }
     }
 }

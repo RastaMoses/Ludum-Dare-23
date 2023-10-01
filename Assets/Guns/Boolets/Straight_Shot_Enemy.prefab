@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 895456277530134077}
   - component: {fileID: 3452555423304693003}
   m_Layer: 8
-  m_Name: Straight_Shot
+  m_Name: Straight_Shot_Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55,7 +55,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d392672f1f2960a44b4520fb214e5d03, type: 2}
+  - {fileID: 2100000, guid: 82a8b6d2ca793494b9ad0d4a5650411d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -99,9 +99,9 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0, g: 1, b: 0.78415227, a: 1}
-      key1: {r: 0, g: 1, b: 0.78415227, a: 1}
-      key2: {r: 0.38679248, g: 0, b: 0, a: 0}
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -109,7 +109,7 @@ LineRenderer:
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
       ctime1: 65535
-      ctime2: 65535
+      ctime2: 0
       ctime3: 0
       ctime4: 0
       ctime5: 0
@@ -117,9 +117,9 @@ LineRenderer:
       ctime7: 0
       atime0: 0
       atime1: 65535
-      atime2: 65535
-      atime3: 65535
-      atime4: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
       atime5: 0
       atime6: 0
       atime7: 0
@@ -146,19 +146,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e947a8aae79eaf940a56c78343ce8269, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  friendly: 1
-  nice:
-    serializedVersion: 2
-    rgba: 4294967040
-  evil:
-    serializedVersion: 2
-    rgba: 4278190335
+  friendly: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 192
   col: {fileID: 6733410975018143199}
   dir: {x: 0, y: 0, z: 0}
-  friendlyTime: 10
 --- !u!54 &3452555423304693003
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -218,5 +211,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 1.5, z: 1.5}
+  m_Size: {x: 0.2, y: 0.2, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class FPS_Controller : MonoBehaviour
 {
     public Gun gun;
-    public GameObject meleePlatform;
+    public GameObject meleePlatform, slash;
     public Image meleeChargeUI;
     public Transform shotSpawn;
     public LayerMask groundLayers;
@@ -54,32 +54,41 @@ public class FPS_Controller : MonoBehaviour
     public void Shoot(InputAction.CallbackContext ctx) { 
         if(ctx.performed && canShoot) {
             StartCoroutine(ShootCooldown());
-            Instantiate(gun.boolet, shotSpawn.position, shotSpawn.rotation).GetComponent<Rail>();
+            Instantiate(gun.boolet, shotSpawn.position, shotSpawn.rotation);
         }
     }
-    public void Melee(InputAction.CallbackContext ctx) { 
-        if(ctx.performed && barCharge == 1) {
+    public void Melee(InputAction.CallbackContext ctx) {
+        if (ctx.performed && barCharge == 1)
+        {
             barCharge = 0;
             Melee_Platform plat = FindObjectOfType<Melee_Platform>();
             if (plat != null) { Destroy(plat.transform.root.gameObject); }
             meleeChargeUI.fillAmount = 0;
             Instantiate(meleePlatform, shotSpawn.position, shotSpawn.rotation);
+            Instantiate(slash, shotSpawn.position, shotSpawn.rotation);
         }
     }
     public void Dash(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && canDash && !grinding) { StartCoroutine(Dash(shotSpawn.forward)); }
+        if (ctx.performed && canDash) {
+            grinding = false;
+            StartCoroutine(Dash(shotSpawn.forward));
+        }
     }
     public void Crouch(InputAction.CallbackContext ctx)
     {
-        if(jumpCount < 2 && ctx.performed) { pounding = true; movement.y = -6; }
+        if((jumpCount < 2 && ctx.performed) || (grinding && ctx.performed)) {
+            grinding = false;
+            pounding = true; 
+            movement.y = -6; 
+        }
     }
     #endregion
 
     private void Update()
     {
         if(Vector2.Distance(new Vector2(transform.position.x, transform.position.z), endPos) < 1) {
-            movement.y = jumpStrength * 1.25f;
+            movement.y = jumpStrength * 0.5f;
             jumpCount--;
             grinding = false;
             canDash = true;
@@ -104,7 +113,7 @@ public class FPS_Controller : MonoBehaviour
     }
 
     public void BeginGrind(Vector3 railForward, Vector3 end1, Vector3 end2) {
-        if (movement.y > 0 || grinding) { return; }
+        if (movement.y > 0 || grinding || pounding || currentSpeed == 0) { return; }
         #region Movement Calc
         currentSpeed = grindSpeed;
         jumpCount = 2;
@@ -148,6 +157,7 @@ public class FPS_Controller : MonoBehaviour
             yield return null;
         }
         currentSpeed = _speed;
+        movement.y = 0;
     }
     private IEnumerator ShootCooldown() {
         canShoot = false;
