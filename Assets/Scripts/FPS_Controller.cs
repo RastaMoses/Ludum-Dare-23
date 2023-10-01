@@ -32,6 +32,8 @@ public class FPS_Controller : MonoBehaviour
         controller = GetComponent<CharacterController>();
         sfx = GetComponent<SFX>();
         currentSpeed = walkSpeed;
+        ui.UpdateScore(0, 0);
+        ui.UpdateMultiplier(1);
     }
 
     #region Input
@@ -124,7 +126,7 @@ public class FPS_Controller : MonoBehaviour
         ui.UpdateDash(dashCharge);
 
         pointsCooldown -= Time.deltaTime;
-        if(pointsCooldown < 0) { multiplier = 1; }
+        if(pointsCooldown < 0) { multiplier = 1; ui.UpdateMultiplier(1); }
 
         dashCharge = Mathf.Clamp(dashCharge + Time.deltaTime, 0, 2);
 
@@ -223,11 +225,12 @@ public class FPS_Controller : MonoBehaviour
     }
     public void Kill(int scoreValue) {
         pointsCooldown = 10;
-        multiplier = Mathf.Clamp(multiplier + 1, 0, 5);
+        multiplier = Mathf.Clamp(multiplier + 1, 0, 10);
         dashCharge = Mathf.Clamp(dashCharge + 1, 0, 2);
         railCharge = Mathf.Clamp(railCharge + 1, 0, 4);
         score = scoreValue * multiplier;
+        ui.UpdateMultiplier(multiplier);
         ui.UpdateScore(scoreValue * multiplier, score);
     }
-    public void LoseMultiplier() { multiplier = 0; }
+    public void LoseMultiplier(int amnt) { multiplier = Mathf.Clamp(multiplier - amnt, 1, 10); ui.UpdateMultiplier(multiplier); }
 }

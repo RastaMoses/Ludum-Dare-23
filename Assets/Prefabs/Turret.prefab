@@ -358,8 +358,8 @@ MonoBehaviour:
   - {fileID: 264521877685704199}
   - {fileID: 264521879564779274}
   matFlash: {fileID: 2100000, guid: 2eb403eec49d019429281c1e7decd4f5, type: 2}
-  maxHP: 2
-  value: 1
+  maxHP: 3
+  value: 500
   isPlayer: 0
 --- !u!114 &264521879138016381
 MonoBehaviour:
