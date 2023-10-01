@@ -239,6 +239,7 @@ MonoBehaviour:
   shotRecovered: {fileID: 0}
   gunEmpty: {fileID: 0}
   railGunShot: {fileID: 0}
+  artillery: {fileID: 8300000, guid: 89ab1e7ebca898f4a95b562c85c05c88, type: 3}
   randomShot:
   - {fileID: 8300000, guid: 3230c15e50b168e4e939a2f0d2b00519, type: 3}
   - {fileID: 8300000, guid: a4cd8aec6ff20ec4a893e1097e0c1a95, type: 3}
