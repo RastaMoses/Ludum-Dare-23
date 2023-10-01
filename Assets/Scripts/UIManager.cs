@@ -98,6 +98,10 @@ public class UIManager : MonoBehaviour
 
     public void UpdateGun(float gunCharge)
     {
+        if((gunCharge >= 1 && gunCharges[0].enabled == false) || (gunCharge >= 2 && gunCharges[1].enabled == false) || (gunCharge >= 3 && gunCharges[2].enabled == false) || (gunCharge == 4 && gunCharges[3].enabled == false))
+        {
+            sfx.ShotRecovered();
+        }
         if (gunCharge >= 1) { gunCharges[0].enabled = true; }
         else { gunCharges[0].enabled = false; }
         if (gunCharge >= 2) { gunCharges[1].enabled = true; }
