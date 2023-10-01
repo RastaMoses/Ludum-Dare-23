@@ -11,8 +11,14 @@ public class Melee_Damage : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.tag == "Enemy" && other.transform.root.TryGetComponent<HP>(out HP _hp)) {
-            _hp.TakeDamage(2);
+
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5);
+        foreach (Collider col in hitColliders)
+        {
+            if (col.tag == "Enemy" && col.transform.root.TryGetComponent<HP>(out HP _hp))
+            {
+                _hp.TakeDamage(2);
+            }
         }
     }
 

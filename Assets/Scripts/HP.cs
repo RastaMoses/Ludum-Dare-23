@@ -25,10 +25,6 @@ public class HP : MonoBehaviour
         _currentHP = maxHP;
     }
 
-    private void OnDestroy()
-    {
-        if (!isPlayer) { GameObject.FindGameObjectWithTag("Player").transform.root.GetComponent<FPS_Controller>().Kill(value); }
-    }
 
     private void Update()
     {
@@ -44,7 +40,9 @@ public class HP : MonoBehaviour
         else if (_currentHP > 0) { GetComponent<SFX>().EnemyHit(); }
         else { GetComponent<SFX>().EnemyKill(); }
 
-        if (_currentHP <= 0) {  Destroy(gameObject); }
+        if (_currentHP <= 0) {
+            if (!isPlayer) { GameObject.FindGameObjectWithTag("Player").transform.root.GetComponent<FPS_Controller>().Kill(value); }
+            Destroy(gameObject); }
         
         for (int i = 0; i < meshes.Length; i++)
         {
