@@ -11,7 +11,7 @@ public class Melee_Damage : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.tag == "Enemy" && other.TryGetComponent<HP>(out HP _hp)) {
+        if(other.tag == "Enemy" && other.transform.root.TryGetComponent<HP>(out HP _hp)) {
             _hp.TakeDamage(2);
         }
     }
