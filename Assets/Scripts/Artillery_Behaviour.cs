@@ -6,7 +6,7 @@ public class Artillery_Behaviour : MonoBehaviour
 {
     public float damage;
     public AnimationCurve curve;
-    public float fireRate;
+    public float fireRate, delay;
     public float attackDelay;
     public GameObject attackMesh;
     public Material attackMat;
@@ -17,7 +17,7 @@ public class Artillery_Behaviour : MonoBehaviour
     private void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        StartCoroutine(Attack());
+        StartCoroutine(Delay());
     }
 
     private void OnDestroy()
@@ -26,6 +26,11 @@ public class Artillery_Behaviour : MonoBehaviour
             Destroy(attack);
             Destroy(showMesh);
         }
+    }
+
+    private IEnumerator Delay() {
+        yield return new WaitForSeconds(delay);
+        StartCoroutine(Attack());
     }
 
     private IEnumerator Attack() {

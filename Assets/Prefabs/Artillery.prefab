@@ -209,7 +209,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   fireRate: 3
-  attackDelay: 3
+  delay: 0
+  attackDelay: 1.5
   attackMesh: {fileID: 3386543667961605841, guid: f611f1df7325c394e8c93d4d069571e2,
     type: 3}
   attackMat: {fileID: 2100000, guid: 82a8b6d2ca793494b9ad0d4a5650411d, type: 2}

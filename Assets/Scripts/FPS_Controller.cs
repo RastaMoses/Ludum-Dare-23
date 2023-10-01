@@ -119,6 +119,7 @@ public class FPS_Controller : MonoBehaviour
     private void Update()
     {
         barCharge = Mathf.Clamp(barCharge + Time.deltaTime / 10, 0, 1);
+        railCharge = Mathf.Clamp(railCharge + Time.deltaTime / 20, 0, 4);
 
         //UI
         ui.UpdateGun(railCharge);

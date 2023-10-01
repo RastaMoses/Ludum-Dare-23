@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 20220
+  controlID: 24745
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 20221
+  controlID: 24746
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 20222
+  controlID: 24747
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -228,7 +228,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 469cffff4a9cffff4e9cffff529cffff569cffff5a9cffff5e9cffff629cffff669cffff6a9cffff6e9cffff729cffff56a5ffff68a6ffffeaa8ffff9cdc0000e8dc0000fcdc0000
+      m_ExpandedIDs: 469cffff4a9cffff4e9cffff529cffff569cffff5a9cffff5e9cffff629cffff669cffff6a9cffff6e9cffff729cffff56a5ffff68a6ffffeaa8ffffdedc0000e8dc0000fcdc0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -539,9 +539,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 3.9720526, y: 0.6858816, z: 9.499499}
+    m_Target: {x: -10.664843, y: 15.268431, z: -18.214722}
     speed: 2
-    m_Value: {x: 3.9720526, y: 0.6858816, z: 9.499499}
+    m_Value: {x: -10.664843, y: 15.268431, z: -18.214722}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -588,13 +588,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.13588831, y: -0.80330336, z: 0.20068617, w: 0.54403013}
+    m_Target: {x: 0.004555029, y: -0.24069035, z: -0.0011525329, w: -0.9705953}
     speed: 2
-    m_Value: {x: 0.13588794, y: -0.80330116, z: 0.20068562, w: 0.54402864}
+    m_Value: {x: 0.0045550084, y: -0.24068926, z: -0.0011525276, w: -0.9705909}
   m_Size:
-    m_Target: 5.2898884
+    m_Target: 4.3521686
     speed: 2
-    m_Value: 5.2898884
+    m_Value: 4.3521686
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -722,8 +722,8 @@ MonoBehaviour:
     y: 548
     width: 1301.3334
     height: 319.3333
-  m_MinSize: {x: 230, y: 250}
-  m_MaxSize: {x: 10000, y: 10000}
+  m_MinSize: {x: 231, y: 271}
+  m_MaxSize: {x: 10001, y: 10021}
   m_ActualView: {fileID: 11}
   m_Panes:
   - {fileID: 11}
@@ -772,21 +772,21 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/Prefabs
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/Prefabs
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\langl\OneDrive\Documents\GitHub\Ludum-Dare-23\Ludum-Dare-23
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 4cdb0000
-    m_LastClickedID: 56140
+    scrollPos: {x: 0, y: 57.666687}
+    m_SelectedIDs: 66db0000
+    m_LastClickedID: 56166
     m_ExpandedIDs: 000000004cdb00004edb000050db000064db000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -840,9 +840,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: cca0fcff
-    m_LastClickedInstanceID: -220980
-    m_HadKeyboardFocusLastEvent: 1
+    m_SelectedInstanceIDs: 8845fcff
+    m_LastClickedInstanceID: -244344
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -962,7 +962,7 @@ MonoBehaviour:
     m_CachedPref: 243
     m_ControlHash: 1412526313
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: -220980
+  m_LastInspectedObjectInstanceID: -244344
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
@@ -1004,7 +1004,7 @@ MonoBehaviour:
     m_CachedPref: 160
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: -220980
+  m_LastInspectedObjectInstanceID: -244344
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
