@@ -16,10 +16,12 @@ public class FPS_Controller : MonoBehaviour
     [SerializeField] Transform groundCheck;
     public Vector3 posChange = Vector3.zero;
 
+
     private Vector3 movement = Vector3.zero, grindDir = Vector3.zero;
     private Vector2 endPos = new Vector2(999, 999);
     private CharacterController controller;
-    private float currentSpeed, barCharge = 1, dashCharge = 2, railCharge = 4;
+    [HideInInspector] public float currentSpeed, barCharge = 1, dashCharge = 2, railCharge = 4, pointsCooldown = 0;
+    [HideInInspector] public int score, multiplier = 1;
     private int jumpCount = 2;
     private bool canShoot = true, grinding = false, pounding = false, canDash = false, grounded = true, canSlash = true;
 
@@ -96,6 +98,9 @@ public class FPS_Controller : MonoBehaviour
 
     private void Update()
     {
+        pointsCooldown -= Time.deltaTime;
+        if(pointsCooldown < 0) { multiplier = 1; }
+
         dashCharge = Mathf.Clamp(dashCharge + Time.deltaTime, 0, 2);
 
         if(Vector2.Distance(new Vector2(transform.position.x, transform.position.z), endPos) < 1) {
@@ -188,8 +193,12 @@ public class FPS_Controller : MonoBehaviour
         movement.y = jumpStrength * 1.25f;
         grinding = false;
     }
-    public void Kill() {
+    public void Kill(int scoreValue) {
+        pointsCooldown = 10;
+        multiplier = Mathf.Clamp(multiplier + 1, 0, 5);
         dashCharge = Mathf.Clamp(dashCharge + 1, 0, 2);
         railCharge = Mathf.Clamp(railCharge + 1, 0, 4);
+        score = scoreValue * multiplier;
     }
+    public void LoseMultiplier() { multiplier = 0; }
 }
