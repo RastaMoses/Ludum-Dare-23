@@ -7,6 +7,8 @@ using System;
 
 public class UIManager : MonoBehaviour
 {
+    public SFX sfx;
+
     //Serialize Params
     [Header("UI Elements")]
     [Header("Reticle")]
@@ -67,6 +69,10 @@ public class UIManager : MonoBehaviour
 
     public void UpdateDash(float dashAmount)
     {
+        if((dashAmount > 1 && dashes[0].enabled == false) || (dashAmount == 2 && dashes[1].enabled == false)) {
+            sfx.DashRecovered();
+        }
+
         if (dashAmount < 1)
         {
             dashes[0].enabled = false;
