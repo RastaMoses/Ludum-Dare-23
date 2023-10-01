@@ -214,6 +214,7 @@ MonoBehaviour:
   attackMesh: {fileID: 3386543667961605841, guid: f611f1df7325c394e8c93d4d069571e2,
     type: 3}
   attackMat: {fileID: 2100000, guid: 82a8b6d2ca793494b9ad0d4a5650411d, type: 2}
+  bug: {fileID: 8710151745597930131, guid: 22bcbabd357b84d4bad32f548ee4ebc4, type: 3}
 --- !u!114 &6790459343614630912
 MonoBehaviour:
   m_ObjectHideFlags: 0

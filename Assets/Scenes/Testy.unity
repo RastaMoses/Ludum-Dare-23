@@ -209,6 +209,101 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1636210885}
     m_Modifications:
+    - target: {fileID: 8710151745597930130, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
+        type: 3}
+      propertyPath: BPM
+      value: 162
+      objectReference: {fileID: 0}
+    - target: {fileID: 8710151745597930130, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
+        type: 3}
+      propertyPath: pause
+      value: 0.3375
+      objectReference: {fileID: 0}
+    - target: {fileID: 8710151745597930130, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
+        type: 3}
+      propertyPath: speed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8710151745597930130, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
+        type: 3}
+      propertyPath: pulseRate
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8710151745597930130, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
+        type: 3}
+      propertyPath: beatsPerSecond
+      value: 10.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8710151745597930130, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
+        type: 3}
+      propertyPath: pulseCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8710151745597930130, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
+        type: 3}
+      propertyPath: pulseCurve.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8710151745597930130, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
+        type: 3}
+      propertyPath: pulseCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8710151745597930130, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
+        type: 3}
+      propertyPath: pulseCurve.m_Curve.Array.data[2].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8710151745597930130, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
+        type: 3}
+      propertyPath: pulseCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8710151745597930130, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
+        type: 3}
+      propertyPath: pulseCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8710151745597930130, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
+        type: 3}
+      propertyPath: pulseCurve.m_Curve.Array.data[2].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8710151745597930130, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
+        type: 3}
+      propertyPath: pulseCurve.m_Curve.Array.data[0].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8710151745597930130, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
+        type: 3}
+      propertyPath: pulseCurve.m_Curve.Array.data[1].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8710151745597930130, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
+        type: 3}
+      propertyPath: pulseCurve.m_Curve.Array.data[0].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8710151745597930130, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
+        type: 3}
+      propertyPath: pulseCurve.m_Curve.Array.data[1].inWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8710151745597930130, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
+        type: 3}
+      propertyPath: pulseCurve.m_Curve.Array.data[1].outSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8710151745597930130, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
+        type: 3}
+      propertyPath: pulseCurve.m_Curve.Array.data[0].outWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8710151745597930130, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
+        type: 3}
+      propertyPath: pulseCurve.m_Curve.Array.data[1].outWeight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8710151745597930131, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
         type: 3}
       propertyPath: m_Name
@@ -639,6 +734,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1636210885}
     m_Modifications:
+    - target: {fileID: 8710151745597930130, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
+        type: 3}
+      propertyPath: BPM
+      value: 162
+      objectReference: {fileID: 0}
     - target: {fileID: 8710151745597930131, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
         type: 3}
       propertyPath: m_Name
@@ -811,6 +911,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1636210885}
     m_Modifications:
+    - target: {fileID: 8710151745597930130, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
+        type: 3}
+      propertyPath: BPM
+      value: 162
+      objectReference: {fileID: 0}
     - target: {fileID: 8710151745597930131, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
         type: 3}
       propertyPath: m_Name
@@ -988,6 +1093,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Artillery (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3713237484316251024, guid: 0a6b4fc5be1e50f4a917d82a2edc69d4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3713237484316251037, guid: 0a6b4fc5be1e50f4a917d82a2edc69d4,
         type: 3}
       propertyPath: delay
@@ -1057,6 +1167,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1636210885}
     m_Modifications:
+    - target: {fileID: 8710151745597930130, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
+        type: 3}
+      propertyPath: BPM
+      value: 162
+      objectReference: {fileID: 0}
     - target: {fileID: 8710151745597930131, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
         type: 3}
       propertyPath: m_Name
@@ -1734,6 +1849,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1636210885}
     m_Modifications:
+    - target: {fileID: 8710151745597930130, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
+        type: 3}
+      propertyPath: BPM
+      value: 162
+      objectReference: {fileID: 0}
     - target: {fileID: 8710151745597930131, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
         type: 3}
       propertyPath: m_Name
@@ -2982,6 +3102,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1636210885}
     m_Modifications:
+    - target: {fileID: 8710151745597930130, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
+        type: 3}
+      propertyPath: BPM
+      value: 162
+      objectReference: {fileID: 0}
     - target: {fileID: 8710151745597930131, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
         type: 3}
       propertyPath: m_Name

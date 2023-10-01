@@ -13,6 +13,7 @@ public class Artillery_Behaviour : MonoBehaviour
 
     private GameObject showMesh, attack;
     private Transform target;
+    public GameObject bug;
 
     private void Start()
     {
@@ -26,9 +27,16 @@ public class Artillery_Behaviour : MonoBehaviour
             Destroy(attack);
             Destroy(showMesh);
         }
+        for (int i = 0; i < 3; i++)
+        {
+            Vector3 spawn = Random.onUnitSphere;
+            spawn.y += 1;
+            HP _hp = Instantiate(bug, spawn, transform.rotation).GetComponent<HP>();
+            _hp.InvulnerableSpawn();
+        }
     }
 
-    private IEnumerator Delay() {
+private IEnumerator Delay() {
         yield return new WaitForSeconds(delay);
         StartCoroutine(Attack());
     }

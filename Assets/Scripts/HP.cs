@@ -60,4 +60,9 @@ public class HP : MonoBehaviour
         yield return new WaitForSeconds(0.75f);
         damagable = true;
     }
+
+    public void InvulnerableSpawn()
+    {
+        StartCoroutine(Invincibility());
+    }
 }
