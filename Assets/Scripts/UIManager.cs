@@ -8,6 +8,8 @@ public class UIManager : MonoBehaviour
 {
     [Header("UI Elements")]
     [Header("Reticle")]
+    [SerializeField] [Range(0,4)]float debugGun;
+    [SerializeField] [Range(0,1)]float debugPlatform;
     [SerializeField] Image crosshair;
     [SerializeField] List<Image> dashes;
     [SerializeField] Image platformChargeSprite;
@@ -42,6 +44,8 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         UpdateHealth(debugHealth);
+        UpdateGun(debugGun);
+        UpdatePlatform(debugPlatform);
     }
 
     #region Public Update Visuals Functions
