@@ -119,6 +119,7 @@ public class UIManager : MonoBehaviour
         scoreBG.text = newScore.ToString("0000000");
         var newPointsObj = Instantiate(newPointsPrefab, verticalLayerGroup.transform);
         newPointsObj.GetComponent<TextMeshProUGUI>().text = newPoints.ToString();
+
         StartCoroutine(ShowPoints(newPointsObj));
     }
 
