@@ -7,7 +7,7 @@ public class HP : MonoBehaviour
 {
     public MeshRenderer[] meshes;
     public Material matFlash;
-    public int maxHP;
+    public int maxHP, value = 1;
     public bool isPlayer = false;
     public TextMeshProUGUI text;
 
@@ -28,14 +28,14 @@ public class HP : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (!isPlayer) { GameObject.FindGameObjectWithTag("Player").transform.root.GetComponent<FPS_Controller>().Kill(); }
+        if (!isPlayer) { GameObject.FindGameObjectWithTag("Player").transform.root.GetComponent<FPS_Controller>().Kill(value); }
     }
 
     public void TakeDamage(float damage) {
         if (!damagable) { return; }
         damagable = false;
         _currentHP -= damage;
-        if (isPlayer) { text.text = "HP: " + _currentHP; }
+        if (isPlayer) { text.text = "HP: " + _currentHP; GetComponent<FPS_Controller>().LoseMultiplier(); }
         if(_currentHP <= 0) { Destroy(gameObject); }
         StartCoroutine(Invincibility());
         for (int i = 0; i < meshes.Length; i++)
