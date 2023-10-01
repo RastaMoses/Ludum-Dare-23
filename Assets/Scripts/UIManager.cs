@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    //Serialize Params
     [Header("UI Elements")]
     [Header("Reticle")]
     [SerializeField] [Range(0,4)]float debugGun;
@@ -17,9 +18,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] List<Image> gunCharges;
     [SerializeField] public Image gunSlider;
     [Header("Score")]
+    [SerializeField] GameObject newPointsPrefab;
     [SerializeField] TextMeshProUGUI score;
+    [SerializeField] TextMeshProUGUI scoreBG;
     [SerializeField] TextMeshProUGUI scoreMultiplier;
-    [SerializeField] List<TextMeshProUGUI> newPoints;
+    [SerializeField] VerticalLayoutGroup verticalLayerGroup;
+    [SerializeField] float pointsTime;
     [Header("Objectives")]
     [SerializeField] TextMeshProUGUI objectiveMain;
     [SerializeField] TextMeshProUGUI objectiveBonus;
@@ -33,6 +37,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] public Image healthSlider;
     [SerializeField] Color lowHealthBar;
     [SerializeField] TextMeshProUGUI lifes;
+    //State
+    List<GameObject> pointsWaitingList = new List<GameObject>();
 
     #region Public Update Visuals Functions
     public void UpdateHealth(float currentHealth)
@@ -105,6 +111,26 @@ public class UIManager : MonoBehaviour
 
         //Slider
         platformSlider.fillAmount = platformCharge;
+    }
+
+    public void UpdateScore(int newPoints, int newScore)
+    {
+        score.text = newScore.ToString("0000000");
+        scoreBG.text = newScore.ToString("0000000");
+        var newPointsObj = Instantiate(newPointsPrefab, verticalLayerGroup.transform);
+        newPointsObj.GetComponent<TextMeshProUGUI>().text = newPoints.ToString();
+        StartCoroutine(ShowPoints(newPointsObj));
+    }
+
+    IEnumerator ShowPoints(GameObject newPoints)
+    {
+        yield return new WaitForSeconds(pointsTime);
+        Destroy(newPoints);
+    }
+
+    public void UpdateMultiplier(int multiplier)
+    {
+        scoreMultiplier.text = multiplier.ToString() + "X";
     }
 
     #endregion
