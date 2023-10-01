@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Rail : MonoBehaviour
 {
+    public AnimationCurve curve;
     public bool friendly;
     public Color32 nice, evil;
     public LayerMask layerMask;
@@ -41,8 +42,8 @@ public class Rail : MonoBehaviour
         if (friendly)
         {
             _friendlyTime -= Time.deltaTime;
-            lineRenderer.startColor = Color32.Lerp(evil, nice, _friendlyTime / friendlyTime);
-            lineRenderer.endColor = Color32.Lerp(evil, nice, _friendlyTime / friendlyTime);
+            lineRenderer.startColor = Color32.Lerp(evil, nice, curve.Evaluate(_friendlyTime / friendlyTime));
+            lineRenderer.endColor = Color32.Lerp(evil, nice, curve.Evaluate(_friendlyTime / friendlyTime));
             if (_friendlyTime < 0) { friendly = false; }
         }
     }
@@ -59,5 +60,14 @@ public class Rail : MonoBehaviour
             _hp.TakeDamage(1);
             damaged = false;
         }
+    }
+
+    public void SetColor(Color32 colour) {
+        lineRenderer.startColor = colour;
+        lineRenderer.endColor = colour;
+    }
+    public void SetDamaged(bool dmg) { damaged = dmg; }
+    public void DecayLine(float amnt) {
+        _friendlyTime -= amnt;
     }
 }

@@ -26,6 +26,11 @@ public class HP : MonoBehaviour
         _currentHP = maxHP;
     }
 
+    private void OnDestroy()
+    {
+        if (!isPlayer) { GameObject.FindGameObjectWithTag("Player").transform.root.GetComponent<FPS_Controller>().Kill(); }
+    }
+
     public void TakeDamage(int damage) {
         if (!damagable) { return; }
         damagable = false;

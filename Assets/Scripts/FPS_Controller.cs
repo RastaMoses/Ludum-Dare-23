@@ -19,9 +19,9 @@ public class FPS_Controller : MonoBehaviour
     private Vector3 movement = Vector3.zero, grindDir = Vector3.zero;
     private Vector2 endPos = new Vector2(999, 999);
     private CharacterController controller;
-    private float currentSpeed, barCharge = 1;
+    private float currentSpeed, barCharge = 1, dashCharge = 2, railCharge = 4;
     private int jumpCount = 2;
-    private bool canShoot = true, grinding = false, pounding = false, canDash = false, grounded = true;
+    private bool canShoot = true, grinding = false, pounding = false, canDash = false, grounded = true, canSlash = true;
 
     private void Start()
     {
@@ -52,12 +52,21 @@ public class FPS_Controller : MonoBehaviour
         }
     }
     public void Shoot(InputAction.CallbackContext ctx) { 
-        if(ctx.performed && canShoot) {
+        if(ctx.performed && canShoot && railCharge >= 1) {
+            railCharge -= 1;
             StartCoroutine(ShootCooldown());
             Instantiate(gun.boolet, shotSpawn.position, shotSpawn.rotation);
         }
     }
     public void Melee(InputAction.CallbackContext ctx) {
+        if (ctx.performed && canSlash)
+        {
+            canSlash = false;
+            StartCoroutine(SlashCooldown());
+            Instantiate(slash, shotSpawn.position, shotSpawn.rotation);
+        }
+    }
+    public void Platform(InputAction.CallbackContext ctx) {
         if (ctx.performed && barCharge == 1)
         {
             barCharge = 0;
@@ -65,13 +74,13 @@ public class FPS_Controller : MonoBehaviour
             if (plat != null) { Destroy(plat.transform.root.gameObject); }
             meleeChargeUI.fillAmount = 0;
             Instantiate(meleePlatform, shotSpawn.position, shotSpawn.rotation);
-            Instantiate(slash, shotSpawn.position, shotSpawn.rotation);
         }
     }
     public void Dash(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && canDash) {
+        if (ctx.performed && canDash && dashCharge >= 1) {
             grinding = false;
+            dashCharge -= 1;
             StartCoroutine(Dash(shotSpawn.forward));
         }
     }
@@ -87,6 +96,8 @@ public class FPS_Controller : MonoBehaviour
 
     private void Update()
     {
+        dashCharge = Mathf.Clamp(dashCharge + Time.deltaTime, 0, 2);
+
         if(Vector2.Distance(new Vector2(transform.position.x, transform.position.z), endPos) < 1) {
             movement.y = jumpStrength * 0.5f;
             jumpCount--;
@@ -104,6 +115,7 @@ public class FPS_Controller : MonoBehaviour
             controller.Move(xyMove * Time.deltaTime * currentSpeed);
         }
         else {
+            railCharge = Mathf.Clamp(railCharge + Time.deltaTime, 0, 4);
             controller.Move(grindDir * Time.deltaTime * currentSpeed);
             barCharge = Mathf.Clamp(barCharge + Time.deltaTime, 0, 1);
             meleeChargeUI.fillAmount = barCharge;
@@ -147,6 +159,10 @@ public class FPS_Controller : MonoBehaviour
         grounded = false;
     }
 
+    private IEnumerator SlashCooldown() {
+        yield return new WaitForSeconds(1);
+        canSlash = true;
+    }
     private IEnumerator Dash(Vector3 dashDir) {
         float timer = 0;
         float _speed = currentSpeed;
@@ -167,5 +183,13 @@ public class FPS_Controller : MonoBehaviour
     private IEnumerator PoundJump() {
         yield return new WaitForSeconds(0.25f);
         pounding = false;
+    }
+    public void Launch() {
+        movement.y = jumpStrength * 1.25f;
+        grinding = false;
+    }
+    public void Kill() {
+        dashCharge = Mathf.Clamp(dashCharge + 1, 0, 2);
+        railCharge = Mathf.Clamp(railCharge + 1, 0, 4);
     }
 }
