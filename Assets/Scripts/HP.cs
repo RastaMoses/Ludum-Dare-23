@@ -33,7 +33,7 @@ public class HP : MonoBehaviour
         if (!damagable) { return; }
         _currentHP -= damage;
 
-        if (isPlayer) { StartCoroutine(Invincibility()); GetComponent<FPS_Controller>().ui.UpdateHealth(_currentHP); GetComponent<FPS_Controller>().LoseMultiplier(); }
+        if (isPlayer) { StartCoroutine(Invincibility()); GetComponent<FPS_Controller>().ui.UpdateHealth(_currentHP); GetComponent<FPS_Controller>().LoseMultiplier(1); }
         else if (_currentHP > 0) { GetComponent<SFX>().EnemyHit(); }
         else { GetComponent<SFX>().EnemyKill(); }
 
@@ -57,7 +57,7 @@ public class HP : MonoBehaviour
     IEnumerator Invincibility()
     {
         damagable = false;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.75f);
         damagable = true;
     }
 }

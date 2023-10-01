@@ -140,7 +140,7 @@ MonoBehaviour:
   - {fileID: 3713237485441141707}
   matFlash: {fileID: 2100000, guid: 2eb403eec49d019429281c1e7decd4f5, type: 2}
   maxHP: 5
-  value: 1
+  value: 1000
   isPlayer: 0
 --- !u!65 &3713237484316251035
 BoxCollider:
