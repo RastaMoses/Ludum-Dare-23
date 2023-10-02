@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Objective : MonoBehaviour
+[CreateAssetMenu]
+public class Objective : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public bool killAll;
+    public bool spawnWave;
+    public int waveToSpawn;
+    public string objectiveText;
+    public string bonusObjectiveText;
+    public int bonusObjectivePoints;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public bool buttonsObjective;
+    public bool timeLimit;
+    public float time;
+    public bool noDamage;
 }

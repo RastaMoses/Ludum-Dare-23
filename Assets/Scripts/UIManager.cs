@@ -226,6 +226,7 @@ public class UIManager : MonoBehaviour
     public void UpdateObjectives(string mainObjective, string bonusObjective, int bonusPointsAmount)
     {
         objectiveMain.text = mainObjective;
+        Debug.Log(mainObjective);
         objectiveBonus.text = bonusObjective;
         bonusPoints.text = "+" + bonusPointsAmount.ToString();
     }
