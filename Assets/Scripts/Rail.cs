@@ -8,7 +8,7 @@ public class Rail : MonoBehaviour
     public AnimationCurve curve;
     public bool friendly;
     public Color32 nice, evil;
-    public LayerMask layerMask;
+    public LayerMask layerMask, evilMask;
     public BoxCollider col;
     public Vector3 dir;
     public float friendlyTime, damage;
@@ -34,6 +34,18 @@ public class Rail : MonoBehaviour
             col.transform.position = (hit.point + transform.position) / 2;
             col.transform.localEulerAngles = new Vector3(90, 0, 0);
             col.size = new Vector3(col.size.x, Vector3.Distance(hit.point, transform.position), col.size.z);
+
+            if (!friendly) { return; }
+
+            Collider[] _col = Physics.OverlapSphere(transform.position, 0.1f);
+            foreach(Collider collider in _col) { 
+                if(collider.gameObject.layer == 11) { friendly = false; SetColor(evil); damage = 5; return; }
+            }
+            _col = Physics.OverlapSphere(hitPoint, 0.1f);
+            foreach (Collider collider in _col)
+            {
+                if (collider.gameObject.layer == 11) { friendly = false; SetColor(evil); damage = 5; return; }
+            }
         }
         else
         {
@@ -46,7 +58,7 @@ public class Rail : MonoBehaviour
         if (friendly)
         {
             _friendlyTime -= Time.deltaTime;
-            if (_friendlyTime < 0) { friendly = false; SetColor(evil); }
+            if (_friendlyTime < 0) { friendly = false; SetColor(evil); damage = 5; }
         }
     }
 

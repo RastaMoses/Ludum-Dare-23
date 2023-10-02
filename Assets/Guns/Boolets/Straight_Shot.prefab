@@ -89,7 +89,10 @@ MonoBehaviour:
     rgba: 4278190335
   layerMask:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 2240
+  evilMask:
+    serializedVersion: 2
+    m_Bits: 2048
   col: {fileID: 6733410975018143199}
   dir: {x: 0, y: 0, z: 0}
   friendlyTime: 15
