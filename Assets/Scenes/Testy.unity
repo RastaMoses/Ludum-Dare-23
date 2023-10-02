@@ -2761,6 +2761,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d81dc24190bbe84784ae7255aec760a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  killAll: 0
+  spawnWave: 0
+  waveToSpawn: 0
+  objectiveText: 
+  bonusObjectiveText: 
+  bonusObjectivePoints: 0
+  buttonsObjective: 0
+  timeLimit: 0
+  time: 0
+  noDamage: 0
 --- !u!4 &1409958572
 Transform:
   m_ObjectHideFlags: 0
@@ -2991,7 +3001,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1636210885
 Transform:
   m_ObjectHideFlags: 0

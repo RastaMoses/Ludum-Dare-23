@@ -376,6 +376,7 @@ GameObject:
   - component: {fileID: 8050378998493161087}
   - component: {fileID: 8050378998493161084}
   - component: {fileID: 8050378998493161085}
+  - component: {fileID: 7781957625886383047}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -677,6 +678,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshes: []
+  deathVFX: {fileID: 0}
   matFlash: {fileID: 2100000, guid: 82a8b6d2ca793494b9ad0d4a5650411d, type: 2}
   maxHP: 100
   value: 1
@@ -693,10 +695,10 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8fbb4dd4b83748a4abce2442cddad658, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -806,6 +808,19 @@ MonoBehaviour:
   playerHit: {fileID: 8300000, guid: a9a51675f737a894881db476230da3e4, type: 3}
   dashRecovered: {fileID: 8300000, guid: ba959d07c2d9201408c92f29d1600665, type: 3}
   randomShot: []
+--- !u!114 &7781957625886383047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8050378998493161076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e4c3ee164fb634580f0b86a0d12d34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startTime: 26.67
 --- !u!1 &8050378998769250062
 GameObject:
   m_ObjectHideFlags: 0
