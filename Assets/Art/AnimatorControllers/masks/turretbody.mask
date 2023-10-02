@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: turretbody
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Armature.001
+    m_Weight: 1
+  - m_Path: Armature.001/BASE
+    m_Weight: 1
+  - m_Path: Armature.001/BASE/Bone.001
+    m_Weight: 1
+  - m_Path: Armature.001/BASE/Bone.001/Bone.007
+    m_Weight: 1
+  - m_Path: Armature.001/BASE/Bone.001/Bone.007/Bone.006
+    m_Weight: 1
+  - m_Path: Armature.001/BASE/Bone.001/Bone.007/Bone.006/Bone.005
+    m_Weight: 1
+  - m_Path: Armature.001/BASE/Bone.001/Bone.007/Bone.006/Bone.005/Bone.004
+    m_Weight: 1
+  - m_Path: Armature.001/BASE/Bone.001/Bone.007/Bone.006/Bone.005/Bone.004/Bone.003
+    m_Weight: 1
+  - m_Path: Armature.001/BASE/Bone.001/leggo1-mid_l
+    m_Weight: 1
+  - m_Path: Armature.001/BASE/Bone.001/leggo1-mid_l/leggo2-mid_l
+    m_Weight: 1
+  - m_Path: Armature.001/BASE/Bone.001/leggo1-mid_l.001
+    m_Weight: 1
+  - m_Path: Armature.001/BASE/Bone.001/leggo1-mid_l.001/leggo2-mid_l.001
+    m_Weight: 1
+  - m_Path: Armature.001/BASE/Bone.001/leggo1-mid_l.002
+    m_Weight: 1
+  - m_Path: Armature.001/BASE/Bone.001/leggo1-mid_l.002/leggo2-mid_l.002
+    m_Weight: 1
+  - m_Path: Armature.001/BASE/Bone.001/leggo1-mid_r
+    m_Weight: 1
+  - m_Path: Armature.001/BASE/Bone.001/leggo1-mid_r/leggo2-mid_r
+    m_Weight: 1
+  - m_Path: Armature.001/BASE/Bone.001/leggo1-mid_r.001
+    m_Weight: 1
+  - m_Path: Armature.001/BASE/Bone.001/leggo1-mid_r.001/leggo2-mid_r.001
+    m_Weight: 1
+  - m_Path: Armature.001/BASE/Bone.001/leggo1-mid_r.002
+    m_Weight: 1
+  - m_Path: Armature.001/BASE/Bone.001/leggo1-mid_r.002/leggo2-mid_r.002
+    m_Weight: 1
+  - m_Path: Armature.001/BASE/Head_CTRL
+    m_Weight: 1
+  - m_Path: Armature.001/Bone.002
+    m_Weight: 0
+  - m_Path: Armature.001/Bone.002/face
+    m_Weight: 1
+  - m_Path: Armature.001/Bone.002/grid
+    m_Weight: 0
+  - m_Path: Cube.002
+    m_Weight: 0
+  - m_Path: Cube.003
+    m_Weight: 0
+  - m_Path: Cube.005
+    m_Weight: 0
+  - m_Path: Cylinder
+    m_Weight: 0
+  - m_Path: Cylinder.001
+    m_Weight: 0
+  - m_Path: Cylinder.002
+    m_Weight: 0
+  - m_Path: Cylinder.003
+    m_Weight: 0
