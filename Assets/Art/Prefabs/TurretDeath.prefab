@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3875431802918773243}
   - component: {fileID: 4601216481656222519}
   - component: {fileID: 8399453252612492075}
+  - component: {fileID: -6098362528909561794}
   m_Layer: 0
   m_Name: TurretDeath
   m_TagString: Untagged
@@ -110,3 +111,16 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &-6098362528909561794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325805225324879513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94e75c4cd061eb246bea6b61f034fa60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 1

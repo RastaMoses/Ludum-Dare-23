@@ -8,12 +8,13 @@ public class Artillery_Behaviour : MonoBehaviour
     public AnimationCurve curve;
     public float fireRate, delay;
     public float attackDelay;
-    public GameObject attackMesh;
+    public GameObject attackMesh, deathVFX;
     public Material attackMat;
 
     private GameObject showMesh, attack;
     private Transform target;
     public GameObject bug;
+    public Animator anim;
 
     private void Start()
     {
@@ -42,6 +43,7 @@ private IEnumerator Delay() {
     }
 
     private IEnumerator Attack() {
+        anim.SetTrigger("spawnball");
         yield return new WaitForSeconds(fireRate);
         showMesh = Instantiate(attackMesh, target.position, transform.rotation);
         attack = Instantiate(attackMesh, target.position, transform.rotation);
@@ -53,6 +55,7 @@ private IEnumerator Delay() {
     }
 
     private IEnumerator AttackDelay() {
+        anim.SetTrigger("attack");
         float timer = 0;
         GetComponent<SFX>().ArtileryShot();
         while(attack.transform.localScale.x != showMesh.transform.localScale.x) {
@@ -63,7 +66,7 @@ private IEnumerator Delay() {
         GetComponent<SFX>().RandomShot();
         Collider[] colliders = Physics.OverlapSphere(attack.transform.position, attack.transform.localScale.x / 2);
         foreach(Collider col in colliders) { 
-            if(col.transform.root.TryGetComponent<HP>(out HP _hp)) { _hp.TakeDamage(damage); }
+            if(col.transform.root.TryGetComponent<HP>(out HP _hp) && _hp.isPlayer) { _hp.TakeDamage(damage); }
             if(col.transform.root.TryGetComponent<Rail>(out Rail _rail)) { _rail.friendly = false; _rail.SetColor(new Color32(255, 0, 0, 255)); }
         }
 
