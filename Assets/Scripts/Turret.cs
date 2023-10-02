@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Turret : MonoBehaviour
 {
-    public Image shotBar;
     public AnimationCurve curve;
     public LayerMask mask;
     public GameObject bullet;
@@ -14,6 +12,7 @@ public class Turret : MonoBehaviour
 
     private Transform target;
     private float timer;
+    public Animator anim;
 
     void Start()
     {
@@ -24,14 +23,14 @@ public class Turret : MonoBehaviour
     {
         if(target == null) { return; }
 
-        shotBar.fillAmount = curve.Evaluate(timer / shotSpeed);
-
         if (timer < shotSpeed * 0.9f)
         {
             head.LookAt(target);
         }
 
         if (!Physics.Raycast(shotSpawn.position, shotSpawn.forward, Vector3.Distance(shotSpawn.position, target.position), mask)) {
+            if (anim.GetCurrentAnimatorStateInfo(1).IsTag("Idle")) { anim.SetTrigger("charge"); }
+
             timer += Time.deltaTime;
 
             if (timer >= shotSpeed)
@@ -43,6 +42,7 @@ public class Turret : MonoBehaviour
         }
         else
         {
+            anim.SetTrigger("cancelled");
             timer = 0;
         }
     }
