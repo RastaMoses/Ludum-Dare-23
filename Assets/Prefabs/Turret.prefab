@@ -58,12 +58,12 @@ MonoBehaviour:
   - {fileID: 9072887998172743299}
   deathVFX: {fileID: 1325805225324879513, guid: 622bbaa2b2e3a344e90072ebb7c50e84,
     type: 3}
-  matFlash: {fileID: 2100000, guid: 2eb403eec49d019429281c1e7decd4f5, type: 2}
-  hitFlashTime: 0.2
+  hitFlashTime: 2
   maxHP: 2
   value: 500
   aS: {fileID: 0}
   isPlayer: 0
+  hitVFX: {fileID: 224849402177860947, guid: e3aa1737bcdc37e4fbb8629c8a8c53b5, type: 3}
 --- !u!114 &264521879138016381
 MonoBehaviour:
   m_ObjectHideFlags: 0

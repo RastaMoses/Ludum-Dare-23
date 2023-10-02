@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class HP : MonoBehaviour
 {
     public SkinnedMeshRenderer[] meshes;
     public GameObject deathVFX;
-    public float hitFlashTime = 0.2f;
+    public float hitFlashTime = 0.7f;
     public int maxHP, value = 1;
     public AudioSource aS;
     public bool isPlayer = false;
@@ -15,6 +16,7 @@ public class HP : MonoBehaviour
     private float _currentHP;
     private bool damagable = true;
     private Material[] defaultMat;
+    public GameObject hitVFX;
 
     private void Start()
     {
@@ -44,30 +46,31 @@ public class HP : MonoBehaviour
         else if (_currentHP > 0) 
         {
             GetComponent<SFX>().EnemyHit();
+            Flash();
         }
         else { GetComponent<SFX>().EnemyKill(); 
-            GameObject fx = Instantiate(deathVFX, transform.position + new Vector3(0, 2, 0), transform.rotation);
-            fx.transform.localScale = new Vector3(5, 5, 5);
+            Flash();
+            KillVFX();
         }
 
         if (_currentHP <= 0) {
             if (!isPlayer) { GameObject.FindGameObjectWithTag("Player").transform.root.GetComponent<FPS_Controller>().Kill(value); FindObjectOfType<LevelManager>().EnemyKilled(); }
-            Destroy(gameObject); }
-        StartCoroutine(Flash());
+
+            Destroy(gameObject);
+
+        }
     }
 
-    IEnumerator Flash() {
-        foreach (var mesh in meshes)
-        {
-            mesh.material.SetInt("_enemyHit", 1);
-            Debug.Log("Enemy Flash");
-        }
-        yield return new WaitForSeconds(0.2f);
-        foreach (var mesh in meshes)
-        {
-            mesh.material.SetInt("_enemyHit", 0);
-        }
+    void Flash() {
+        var flash = Instantiate(hitVFX, transform.position, Quaternion.identity);
+        
     }
+    void KillVFX()
+    {
+        Debug.Log("Death VFX");
+        Instantiate(deathVFX, transform.position, Quaternion.identity);
+    }
+
 
     IEnumerator Invincibility()
     {
