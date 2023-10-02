@@ -27,6 +27,8 @@ public class FPS_Controller : MonoBehaviour
     private bool canShoot = true, grinding = false, pounding = false, canDash = false, grounded = true, canSlash = true, dashing = false;
     private SFX sfx;
 
+    private int currentScore = 0;
+
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -230,8 +232,9 @@ public class FPS_Controller : MonoBehaviour
         dashCharge = Mathf.Clamp(dashCharge + 1, 0, 2);
         railCharge = Mathf.Clamp(railCharge + 1, 0, 4);
         score = scoreValue * multiplier;
+        currentScore += score;
         ui.UpdateMultiplier(multiplier);
-        ui.UpdateScore(scoreValue * multiplier, score);
+        ui.UpdateScore(scoreValue * multiplier, currentScore);
     }
     public void LoseMultiplier(int amnt) { multiplier = Mathf.Clamp(multiplier - amnt, 1, 10); ui.UpdateMultiplier(multiplier); }
 }
