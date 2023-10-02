@@ -6,7 +6,7 @@ public class SFX : MonoBehaviour
 {
     public bool master = false;
     public GameObject sfxObject;
-    public AudioClip dashFX, enemyHit, enemyKill, healthPickup, melee, railGrind, shotRecovered, gunEmpty, railGunShot, artillery, playerHit;
+    public AudioClip dashFX, enemyHit, enemyKill, healthPickup, melee, railGrind, shotRecovered, gunEmpty, railGunShot, artillery, playerHit, dashRecovered;
     public AudioClip[] randomShot;
 
     private GameObject persistant;
@@ -74,6 +74,10 @@ public class SFX : MonoBehaviour
     public void PlayerHit() {
         SFX _sfx = Instantiate(sfxObject, transform.position, transform.rotation).GetComponent<SFX>();
         _sfx.GetComponent<AudioSource>().clip = playerHit;
+    }
+    public void DashRecovered() {
+        SFX _sfx = Instantiate(sfxObject, transform.position, transform.rotation).GetComponent<SFX>();
+        _sfx.GetComponent<AudioSource>().clip = dashRecovered;
     }
 
     private IEnumerator Kill(float time) {

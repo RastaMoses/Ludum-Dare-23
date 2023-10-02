@@ -7,6 +7,7 @@ public class HP : MonoBehaviour
     public MeshRenderer[] meshes;
     public Material matFlash;
     public int maxHP, value = 1;
+    public AudioSource aS;
     public bool isPlayer = false;
 
     private float _currentHP;
@@ -24,20 +25,24 @@ public class HP : MonoBehaviour
         _currentHP = maxHP;
     }
 
-    private void OnDestroy()
+
+    private void Update()
     {
-        if (!isPlayer) { GameObject.FindGameObjectWithTag("Player").transform.root.GetComponent<FPS_Controller>().Kill(value); }
+        if(_currentHP > 40) { aS.Stop(); }
     }
 
     public void TakeDamage(float damage) {
         if (!damagable) { return; }
         _currentHP -= damage;
+        if(_currentHP <= 40 && isPlayer) { aS.Play(); }
 
         if (isPlayer) { GetComponent<SFX>().PlayerHit(); StartCoroutine(Invincibility()); GetComponent<FPS_Controller>().ui.UpdateHealth(_currentHP); GetComponent<FPS_Controller>().LoseMultiplier(1); }
         else if (_currentHP > 0) { GetComponent<SFX>().EnemyHit(); }
         else { GetComponent<SFX>().EnemyKill(); }
 
-        if (_currentHP <= 0) {  Destroy(gameObject); }
+        if (_currentHP <= 0) {
+            if (!isPlayer) { GameObject.FindGameObjectWithTag("Player").transform.root.GetComponent<FPS_Controller>().Kill(value); }
+            Destroy(gameObject); }
         
         for (int i = 0; i < meshes.Length; i++)
         {

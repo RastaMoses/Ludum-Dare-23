@@ -54,6 +54,7 @@ MonoBehaviour:
   matFlash: {fileID: 2100000, guid: 2eb403eec49d019429281c1e7decd4f5, type: 2}
   maxHP: 1
   value: 100
+  aS: {fileID: 0}
   isPlayer: 0
 --- !u!114 &8710151745597930130
 MonoBehaviour:
@@ -133,7 +134,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 2}
+  m_Size: {x: 3, y: 3, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &8710151745597930142
 Rigidbody:
@@ -175,6 +176,9 @@ MonoBehaviour:
   shotRecovered: {fileID: 0}
   gunEmpty: {fileID: 0}
   railGunShot: {fileID: 0}
+  artillery: {fileID: 0}
+  playerHit: {fileID: 0}
+  dashRecovered: {fileID: 0}
   randomShot: []
 --- !u!82 &-5590105879520377030
 AudioSource:

@@ -360,6 +360,7 @@ MonoBehaviour:
   matFlash: {fileID: 2100000, guid: 2eb403eec49d019429281c1e7decd4f5, type: 2}
   maxHP: 3
   value: 500
+  aS: {fileID: 0}
   isPlayer: 0
 --- !u!114 &264521879138016381
 MonoBehaviour:
@@ -416,7 +417,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.9900464, y: 3.7718909, z: 2.0253465}
+  m_Size: {x: 3, y: 5, z: 3}
   m_Center: {x: 0.0015869737, y: 1.3859457, z: 0.021677613}
 --- !u!54 &496185233154089917
 Rigidbody:
@@ -458,6 +459,9 @@ MonoBehaviour:
   shotRecovered: {fileID: 0}
   gunEmpty: {fileID: 0}
   railGunShot: {fileID: 0}
+  artillery: {fileID: 0}
+  playerHit: {fileID: 0}
+  dashRecovered: {fileID: 0}
   randomShot:
   - {fileID: 8300000, guid: 3230c15e50b168e4e939a2f0d2b00519, type: 3}
   - {fileID: 8300000, guid: a4cd8aec6ff20ec4a893e1097e0c1a95, type: 3}
