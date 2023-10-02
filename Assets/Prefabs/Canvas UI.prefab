@@ -2439,9 +2439,9 @@ MonoBehaviour:
   scoreMultiplier: {fileID: 680151728}
   verticalLayerGroup: {fileID: 5952879488232967080}
   pointsTime: 2
-  objectiveMain: {fileID: 0}
-  objectiveBonus: {fileID: 0}
-  bonusPoints: {fileID: 0}
+  objectiveMain: {fileID: 6319708591341586185}
+  objectiveBonus: {fileID: 1229099141742055387}
+  bonusPoints: {fileID: 4077764070102856829}
   healthPicChangeThreshhold: 25
   healthBG: {fileID: 6370395046227793834}
   healthBGs:
