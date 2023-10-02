@@ -104,7 +104,10 @@ public class LevelManager : MonoBehaviour
         buttonTimer = 0;
         buttonsCounting = true;
         buttonsActive++;
-        StopCoroutine(buttonResetCor);
+        if (buttonResetCor != null)
+        {
+            StopCoroutine(buttonResetCor);
+        }
         foreach (var button in  buttons)
         {
             if (button.pressed)

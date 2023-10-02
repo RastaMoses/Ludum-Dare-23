@@ -54,9 +54,16 @@ public class HP : MonoBehaviour
         }
 
         if (_currentHP <= 0) {
-            if (!isPlayer) { GameObject.FindGameObjectWithTag("Player").transform.root.GetComponent<FPS_Controller>().Kill(value); FindObjectOfType<LevelManager>().EnemyKilled(); }
+            if (!isPlayer) { GameObject.FindGameObjectWithTag("Player").transform.root.GetComponent<FPS_Controller>().Kill(value); FindObjectOfType<LevelManager>().EnemyKilled();
 
-            Destroy(gameObject);
+                Destroy(gameObject);
+            }
+            else
+            {
+                FindObjectOfType<FPS_Controller>().enabled = false;
+                GetComponent<AudioSource>().volume = 0f;
+            }
+
 
         }
     }
