@@ -15,7 +15,27 @@ ModelImporter:
   - first:
       74: 1765979044197086806
     second: squiggly-recover
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: 463a3fe62a871c04a871bd4c322f42cb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.005
+    second: {fileID: 2100000, guid: c35614523bc29434380fdce0623fd0e6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.006
+    second: {fileID: 2100000, guid: 463a3fe62a871c04a871bd4c322f42cb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: outline
+    second: {fileID: 2100000, guid: ed90b921725996249b1d486524c476a7, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
