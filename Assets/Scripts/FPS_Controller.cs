@@ -10,7 +10,7 @@ public class FPS_Controller : MonoBehaviour
     public UIManager ui;
     public GameObject meleePlatform, slash;
     public Transform shotSpawn;
-    public LayerMask groundLayers, shootBlock;
+    public LayerMask groundLayers;
     public float walkSpeed = 10, grindSpeed = 15, jumpStrength = 10f, gravity = 10f;
 
     [SerializeField] Transform groundCheck;
@@ -61,7 +61,6 @@ public class FPS_Controller : MonoBehaviour
         }
     }
     public void Shoot(InputAction.CallbackContext ctx) { 
-        if(ctx.performed && Physics.Raycast(shotSpawn.position, shotSpawn.forward, Mathf.Infinity, shootBlock)) { sfx.GunEmpty(); return; }
         if(ctx.performed && canShoot && railCharge >= 1) {
             vfx.SendEvent("OnPlay");
             rightHand.SetTrigger("shoot");
