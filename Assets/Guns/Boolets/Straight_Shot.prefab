@@ -95,7 +95,7 @@ MonoBehaviour:
     m_Bits: 2048
   col: {fileID: 6733410975018143199}
   dir: {x: 0, y: 0, z: 0}
-  friendlyTime: 10
+  friendlyTime: 15
   damage: 1
   vfx: {fileID: 2718631986177781051}
 --- !u!54 &3452555423304693003

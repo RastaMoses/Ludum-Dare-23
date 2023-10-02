@@ -849,6 +849,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pause Menu
       objectReference: {fileID: 0}
+    - target: {fileID: 2647422313382069194, guid: f8498c6b1134b8146ac9d0ebf22e4fc3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2647422313382069197, guid: f8498c6b1134b8146ac9d0ebf22e4fc3,
         type: 3}
       propertyPath: m_Pivot.x
@@ -959,6 +964,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1849295861}
+    - target: {fileID: 2647422313661276030, guid: f8498c6b1134b8146ac9d0ebf22e4fc3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2647422313796114643, guid: f8498c6b1134b8146ac9d0ebf22e4fc3,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

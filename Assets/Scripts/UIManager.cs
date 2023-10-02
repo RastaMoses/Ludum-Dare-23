@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using System;
 using System.Threading;
+using System.Xml.Linq;
 
 public class UIManager : MonoBehaviour
 {
@@ -45,6 +46,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] float redHealthAnimSpeed;
     [SerializeField] Color lowHealthBar;
     [SerializeField] TextMeshProUGUI lifes;
+    [SerializeField] GameObject gameOverScreen;
+    [SerializeField] AudioClip playerDeathSFX;
 
     [Header("Debug")]
     [SerializeField] float debugHealth = 100f;
@@ -110,6 +113,18 @@ public class UIManager : MonoBehaviour
                 healthSlider.color = Color.white;
             }
         }
+        if (currentHealth <= 0)
+        {
+            StartCoroutine(DeathScreen());
+        }
+
+    }
+    IEnumerator DeathScreen()
+    {
+        GetComponent<AudioSource>().PlayOneShot(playerDeathSFX);
+        gameOverScreen.SetActive(true);
+        yield return new WaitForSeconds(7);
+        FindObjectOfType<SceneLoader>().ReloadLevel();
 
     }
 
