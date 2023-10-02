@@ -547,11 +547,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6370395044611214616, guid: 2161dbbb5fcfa7f489ca898689dfe756,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6370395045759787193, guid: 2161dbbb5fcfa7f489ca898689dfe756,
         type: 3}
       propertyPath: sfx
@@ -666,16 +661,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Canvas UI
-      objectReference: {fileID: 0}
-    - target: {fileID: 6370395045759787206, guid: 2161dbbb5fcfa7f489ca898689dfe756,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6888746327356303131, guid: 2161dbbb5fcfa7f489ca898689dfe756,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2161dbbb5fcfa7f489ca898689dfe756, type: 3}
@@ -7297,7 +7282,7 @@ PrefabInstance:
     - target: {fileID: 277140319643854732, guid: f0f1a0038d26ec7419f512d180f1734f,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 277140319761485064, guid: f0f1a0038d26ec7419f512d180f1734f,
         type: 3}
