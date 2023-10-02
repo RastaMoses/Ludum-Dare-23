@@ -38,11 +38,11 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _noisespeed: 1
-    - _scale1: 136.1
-    - _scale2: 2.9
+    - _scale1: 181.49
+    - _scale2: 4.33
     - _tiling: 23.48
     m_Colors:
-    - _Color: {r: 0, g: 0.84648275, b: 1, a: 0}
+    - _Color: {r: 0.589, g: 0.9344784, b: 1, a: 0}
     - _Color_1: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &5075437329679514607
