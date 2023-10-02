@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 496185233154089917}
   - component: {fileID: 3763676823330023410}
   - component: {fileID: -6880285787298268193}
+  - component: {fileID: 7729621520657223576}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Enemy
@@ -259,6 +260,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7729621520657223576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 264521879138016378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f91ac4915b9c6fa418ab43fc6cafe470, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beatLength: 0.4762
+  beatspeed: 1
+  lerpSpeed: 8
+  mesh: {fileID: 7837722736346793906}
+  onBeat: 1
 --- !u!1 &7178190756381651595
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,6 +419,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 111.98499
+      objectReference: {fileID: 0}
+    - target: {fileID: 1867875884910762042, guid: 25415413d71d134459779218771c5571,
+        type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[0]
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1880529917485715340, guid: 25415413d71d134459779218771c5571,
         type: 3}
@@ -643,6 +666,12 @@ Transform:
 --- !u!4 &3378613342830756433 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6614123856443039193, guid: 25415413d71d134459779218771c5571,
+    type: 3}
+  m_PrefabInstance: {fileID: 8442323463610032008}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &7837722736346793906 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1867875884910762042, guid: 25415413d71d134459779218771c5571,
     type: 3}
   m_PrefabInstance: {fileID: 8442323463610032008}
   m_PrefabAsset: {fileID: 0}

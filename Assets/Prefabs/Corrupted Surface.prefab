@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8024922290904252908}
   - component: {fileID: 8024922290904252909}
   - component: {fileID: 8024922290904252906}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Corrupted Surface
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53a4a8064d4df964f8ee2381287fa623, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 10
 --- !u!54 &8024922290904252906
 Rigidbody:
   m_ObjectHideFlags: 0
