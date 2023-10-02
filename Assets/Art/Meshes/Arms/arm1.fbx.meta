@@ -27,7 +27,27 @@ ModelImporter:
   - first:
       74: -3127488059867855666
     second: groundslam2
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 8d3cbcad544d5ac4cb892f09d76b03cb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: 9a8bedc80ca6d964697a9fdff1c530c5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.002
+    second: {fileID: 2100000, guid: d21a85a352525774c850930d489fef16, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: outline
+    second: {fileID: 2100000, guid: 7e58c7019790d5a48858201a76a0cd0f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
