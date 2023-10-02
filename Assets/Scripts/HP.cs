@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class HP : MonoBehaviour
 {
-    public MeshRenderer[] meshes;
+    public SkinnedMeshRenderer[] meshes;
     public GameObject deathVFX;
-    public Material matFlash;
+    public float hitFlashTime = 0.2f;
     public int maxHP, value = 1;
     public AudioSource aS;
     public bool isPlayer = false;
@@ -40,7 +41,10 @@ public class HP : MonoBehaviour
         if(_currentHP <= 40 && isPlayer) { aS.Play(); }
 
         if (isPlayer) { GetComponent<SFX>().PlayerHit(); StartCoroutine(Invincibility()); GetComponent<FPS_Controller>().ui.UpdateHealth(_currentHP); GetComponent<FPS_Controller>().LoseMultiplier(1); }
-        else if (_currentHP > 0) { GetComponent<SFX>().EnemyHit(); }
+        else if (_currentHP > 0) 
+        {
+            GetComponent<SFX>().EnemyHit();
+        }
         else { GetComponent<SFX>().EnemyKill(); 
             GameObject fx = Instantiate(deathVFX, transform.position + new Vector3(0, 2, 0), transform.rotation);
             fx.transform.localScale = new Vector3(5, 5, 5);
@@ -49,19 +53,19 @@ public class HP : MonoBehaviour
         if (_currentHP <= 0) {
             if (!isPlayer) { GameObject.FindGameObjectWithTag("Player").transform.root.GetComponent<FPS_Controller>().Kill(value); FindObjectOfType<LevelManager>().EnemyKilled(); }
             Destroy(gameObject); }
-        
-        for (int i = 0; i < meshes.Length; i++)
-        {
-            meshes[i].material = matFlash;
-        }
         StartCoroutine(Flash());
     }
 
     IEnumerator Flash() {
-        yield return new WaitForSeconds(0.2f);
-        for (int i = 0; i < meshes.Length; i++)
+        foreach (var mesh in meshes)
         {
-            meshes[i].material = defaultMat[i];
+            mesh.material.SetInt("_enemyHit", 1);
+            Debug.Log("Enemy Flash");
+        }
+        yield return new WaitForSeconds(0.2f);
+        foreach (var mesh in meshes)
+        {
+            mesh.material.SetInt("_enemyHit", 0);
         }
     }
 

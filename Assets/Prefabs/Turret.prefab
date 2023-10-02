@@ -51,11 +51,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b539163b1f2c8824ba62c9fe236a748e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshes: []
+  meshes:
+  - {fileID: 8000026312965236764}
+  - {fileID: 6362502114410813120}
+  - {fileID: 3469469357192069974}
+  - {fileID: 9072887998172743299}
   deathVFX: {fileID: 1325805225324879513, guid: 622bbaa2b2e3a344e90072ebb7c50e84,
     type: 3}
   matFlash: {fileID: 2100000, guid: 2eb403eec49d019429281c1e7decd4f5, type: 2}
-  maxHP: 3
+  hitFlashTime: 0.2
+  maxHP: 2
   value: 500
   aS: {fileID: 0}
   isPlayer: 0
@@ -669,15 +674,39 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8442323463610032008}
   m_PrefabAsset: {fileID: 0}
+--- !u!137 &3469469357192069974 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4976248384729029854, guid: 25415413d71d134459779218771c5571,
+    type: 3}
+  m_PrefabInstance: {fileID: 8442323463610032008}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &6362502114410813120 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3271035562714925384, guid: 25415413d71d134459779218771c5571,
+    type: 3}
+  m_PrefabInstance: {fileID: 8442323463610032008}
+  m_PrefabAsset: {fileID: 0}
 --- !u!137 &7837722736346793906 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 1867875884910762042, guid: 25415413d71d134459779218771c5571,
     type: 3}
   m_PrefabInstance: {fileID: 8442323463610032008}
   m_PrefabAsset: {fileID: 0}
+--- !u!137 &8000026312965236764 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1886135224211470228, guid: 25415413d71d134459779218771c5571,
+    type: 3}
+  m_PrefabInstance: {fileID: 8442323463610032008}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &8647775757343348779 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 948634779115620259, guid: 25415413d71d134459779218771c5571,
+    type: 3}
+  m_PrefabInstance: {fileID: 8442323463610032008}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &9072887998172743299 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 630635775923722507, guid: 25415413d71d134459779218771c5571,
     type: 3}
   m_PrefabInstance: {fileID: 8442323463610032008}
   m_PrefabAsset: {fileID: 0}

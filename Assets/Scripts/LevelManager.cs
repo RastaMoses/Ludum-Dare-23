@@ -21,6 +21,7 @@ public class LevelManager : MonoBehaviour
     int buttonsActive = 0;
     float buttonTimer;
     bool buttonsCounting;
+    Coroutine buttonResetCor;
 
     public int enemyCounter = 0;
     //Components
@@ -51,10 +52,9 @@ public class LevelManager : MonoBehaviour
                 {
                     button.ResetButton();
                 }
-
-                buttonsActive = 0;
-                buttonTimer = 0;
                 buttonsCounting = false;
+                buttonResetCor= StartCoroutine(ButtonReset());
+                
             }
         }
 
@@ -104,6 +104,18 @@ public class LevelManager : MonoBehaviour
         buttonTimer = 0;
         buttonsCounting = true;
         buttonsActive++;
+        StopCoroutine(buttonResetCor);
+        foreach (var button in  buttons)
+        {
+            if (button.pressed)
+            {
+                button.SetWaitColor();
+            }
+            else
+            {
+                button.SetActiveColor();
+            }
+        }
         if (buttonsActive == buttons.Count)
         {
             foreach(var button in buttons)
@@ -115,6 +127,14 @@ public class LevelManager : MonoBehaviour
             buttonsCounting = false;
             buttonsActive = 0;
         }
+    }
+
+    IEnumerator ButtonReset()
+    {
+        yield return new WaitForSeconds(buttons[0].resetAnimDuration);
+        buttonsActive = 0;
+        buttonTimer = 0;
+        buttonsCounting = false;
     }
     #endregion
 
