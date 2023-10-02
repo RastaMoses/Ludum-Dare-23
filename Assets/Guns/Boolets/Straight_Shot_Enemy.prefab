@@ -66,7 +66,7 @@ MonoBehaviour:
   col: {fileID: 6733410975018143199}
   dir: {x: 0, y: 0, z: 0}
   friendlyTime: 0
-  damage: 5
+  damage: 10
   vfx: {fileID: 6778119194501965432}
 --- !u!54 &3452555423304693003
 Rigidbody:

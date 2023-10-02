@@ -288,7 +288,7 @@ MonoBehaviour:
   beatLength: 0.4762
   beatspeed: 1
   lerpSpeed: 8
-  mesh: {fileID: 0}
+  mesh: {fileID: 1028856420734203595}
   onBeat: 1
 --- !u!1001 &983830261745988774
 PrefabInstance:
@@ -399,6 +399,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d802d8cf3ff355547a70314c60fac3fe, type: 3}
+--- !u!137 &1028856420734203595 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 279362951173620333, guid: d802d8cf3ff355547a70314c60fac3fe,
+    type: 3}
+  m_PrefabInstance: {fileID: 983830261745988774}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5730711453703179009 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4765045751197450151, guid: d802d8cf3ff355547a70314c60fac3fe,
