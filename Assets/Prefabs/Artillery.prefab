@@ -51,6 +51,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshes: []
+  deathVFX: {fileID: 7422400498934496593, guid: 328e39bb206d67948a54036dfced6d68,
+    type: 3}
   matFlash: {fileID: 2100000, guid: 2eb403eec49d019429281c1e7decd4f5, type: 2}
   maxHP: 5
   value: 1000
@@ -126,6 +128,8 @@ MonoBehaviour:
   delay: 0
   attackDelay: 1.5
   attackMesh: {fileID: 3386543667961605841, guid: f611f1df7325c394e8c93d4d069571e2,
+    type: 3}
+  deathVFX: {fileID: 7422400498934496593, guid: 328e39bb206d67948a54036dfced6d68,
     type: 3}
   attackMat: {fileID: 2100000, guid: 82a8b6d2ca793494b9ad0d4a5650411d, type: 2}
   bug: {fileID: 8710151745597930131, guid: 22bcbabd357b84d4bad32f548ee4ebc4, type: 3}

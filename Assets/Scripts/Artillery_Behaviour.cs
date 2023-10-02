@@ -8,7 +8,7 @@ public class Artillery_Behaviour : MonoBehaviour
     public AnimationCurve curve;
     public float fireRate, delay;
     public float attackDelay;
-    public GameObject attackMesh;
+    public GameObject attackMesh, deathVFX;
     public Material attackMat;
 
     private GameObject showMesh, attack;

@@ -51,6 +51,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshes: []
+  deathVFX: {fileID: 6475270385787529721, guid: 8bd5ddb10772cd9418f8f87f789332ed,
+    type: 3}
   matFlash: {fileID: 2100000, guid: 2eb403eec49d019429281c1e7decd4f5, type: 2}
   maxHP: 1
   value: 100

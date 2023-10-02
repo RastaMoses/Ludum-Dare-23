@@ -5,6 +5,7 @@ using UnityEngine;
 public class HP : MonoBehaviour
 {
     public MeshRenderer[] meshes;
+    public GameObject deathVFX;
     public Material matFlash;
     public int maxHP, value = 1;
     public AudioSource aS;
@@ -40,7 +41,10 @@ public class HP : MonoBehaviour
 
         if (isPlayer) { GetComponent<SFX>().PlayerHit(); StartCoroutine(Invincibility()); GetComponent<FPS_Controller>().ui.UpdateHealth(_currentHP); GetComponent<FPS_Controller>().LoseMultiplier(1); }
         else if (_currentHP > 0) { GetComponent<SFX>().EnemyHit(); }
-        else { GetComponent<SFX>().EnemyKill(); }
+        else { GetComponent<SFX>().EnemyKill(); 
+            GameObject fx = Instantiate(deathVFX, transform.position + new Vector3(0, 2, 0), transform.rotation);
+            fx.transform.localScale = new Vector3(5, 5, 5);
+        }
 
         if (_currentHP <= 0) {
             if (!isPlayer) { GameObject.FindGameObjectWithTag("Player").transform.root.GetComponent<FPS_Controller>().Kill(value); }
