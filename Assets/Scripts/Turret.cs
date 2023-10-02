@@ -35,6 +35,7 @@ public class Turret : MonoBehaviour
 
             if (timer >= shotSpeed)
             {
+                anim.SetTrigger("Shoot");
                 Instantiate(bullet, shotSpawn.position, shotSpawn.rotation);
                 GetComponent<SFX>().RandomShot();
                 timer = 0;

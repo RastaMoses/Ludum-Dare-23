@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8710151745597930142}
   - component: {fileID: -5715985614070680850}
   - component: {fileID: -5590105879520377030}
+  - component: {fileID: 5794924950885954617}
   m_Layer: 0
   m_Name: Bug
   m_TagString: Enemy
@@ -71,11 +72,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
-  BPM: 0
-  minBlend: 0
-  maxBlend: 100
-  pause: 8
-  pulseRate: 2
   yumCurve:
     serializedVersion: 2
     m_Curve:
@@ -124,7 +120,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  mesh: {fileID: 1028856420734203595}
 --- !u!65 &8710151745597930143
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -278,6 +273,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5794924950885954617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8710151745597930131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f91ac4915b9c6fa418ab43fc6cafe470, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beatLength: 0.4762
+  beatspeed: 1
+  lerpSpeed: 8
+  mesh: {fileID: 0}
+  onBeat: 1
 --- !u!1001 &983830261745988774
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -387,12 +399,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d802d8cf3ff355547a70314c60fac3fe, type: 3}
---- !u!137 &1028856420734203595 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 279362951173620333, guid: d802d8cf3ff355547a70314c60fac3fe,
-    type: 3}
-  m_PrefabInstance: {fileID: 983830261745988774}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5730711453703179009 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4765045751197450151, guid: d802d8cf3ff355547a70314c60fac3fe,
