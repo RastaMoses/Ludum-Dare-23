@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d81dc24190bbe84784ae7255aec760a, type: 3}
   m_Name: 1_Enemies
   m_EditorClassIdentifier: 
-  waveToSpawn: 1
+  killAll: 1
+  spawnWave: 1
+  waveToSpawn: 0
   objectiveText: Cleanse all viruses!
   bonusObjectiveText: Within 120sec
   bonusObjectivePoints: 1000
   buttonsObjective: 0
+  timeLimit: 0
+  time: 0
+  noDamage: 0

@@ -1202,12 +1202,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectives:
   - {fileID: 11400000, guid: 59beea47402935342b743551c18290bc, type: 2}
+  - {fileID: 11400000, guid: 5cdc18226bc2224428c11438b6f91583, type: 2}
   timeBetweenObjectives: 3
   buttonCountdown: 10
   buttons:
   - {fileID: 1883526022}
   - {fileID: 835312486}
   - {fileID: 285885459}
+  waves:
+  - {fileID: 426465160}
+  enemyCounter: 0
 --- !u!4 &276200718
 Transform:
   m_ObjectHideFlags: 0
@@ -1889,7 +1893,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &426465161
 Transform:
   m_ObjectHideFlags: 0

@@ -5,10 +5,10 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     //Serialize Params
-    [SerializeField] List<Objective> objectives;
-    [SerializeField] float timeBetweenObjectives;
 
     [Header("Objectives")]
+    [SerializeField] List<Objective> objectives;
+    [SerializeField] float timeBetweenObjectives;
     [Header("Buttons")]
     [SerializeField] float buttonCountdown = 10f;
     [SerializeField] List<LevelButton> buttons;
@@ -127,7 +127,6 @@ public class LevelManager : MonoBehaviour
             if (enemyCounter == 0)
             {
                 NextObjective();
-                
             }
         }
     }
