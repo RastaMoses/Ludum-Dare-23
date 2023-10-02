@@ -1,14 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class LevelButton : MonoBehaviour
 {
-    [SerializeField] Material mat;
-    [SerializeField] Color waitColor;
-    [SerializeField] Color activeColor;
-    [SerializeField] Color failColor;
-    [SerializeField] Color offColor;
+    
+    [SerializeField]
+    [ColorUsage(true, true)] Color waitColor;
+    [SerializeField]
+    [ColorUsage(true, true)]
+    Color activeColor;
+    [SerializeField]
+    [ColorUsage(true, true)]
+    Color failColor;
+    [SerializeField]
+    [ColorUsage(true, true)]
+    Color offColor;
     [SerializeField] float resetAnimSpeed;
     [SerializeField] float resetAnimDuration;
 
@@ -21,15 +29,19 @@ public class LevelButton : MonoBehaviour
     CharacterController characterController;
     Collider col;
     LevelManager levelManager;
+    Material mat;
+    VisualEffect buttonParticle;
 
     private void Awake()
     {
         characterController = FindObjectOfType<CharacterController>();
         levelManager = FindObjectOfType<LevelManager>();
-        mat = GetComponent<MeshRenderer>().material;
+        mat = GetComponentInChildren<MeshRenderer>().material;
+        buttonParticle = GetComponentInChildren<VisualEffect>();
 
-        //mat.SetColor("buttonColor", offColor);
-        mat.color = offColor;
+        mat.SetColor("_buttonColor", offColor);
+        buttonParticle.SetVector4("_buttonColor", offColor);
+        //mat.color = offColor;
     }
 
 
@@ -45,23 +57,27 @@ public class LevelButton : MonoBehaviour
     {
         interactable = true;
         //Activate Visuals
-        //mat.SetColor("buttonColor", activeColor);
-        mat.color = activeColor;
+        mat.SetColor("_buttonColor", activeColor);
+        buttonParticle.SetVector4("_buttonColor", activeColor);
+        //mat.color = activeColor;
     }
 
     public void Deactivate()
     {
         interactable = false;
         //Deactivate Visuals
-        //mat.SetColor("buttonColor", offColor);
-        mat.color = offColor;
+        
+        mat.SetColor("_buttonColor", offColor);
+        buttonParticle.SetVector4("_buttonColor", offColor);
+        //mat.color = offColor;
     }
 
     public void Pressed()
     {
         interactable = false;
-        //mat.SetColor("buttonColor", waitColor);
-        mat.color = waitColor;
+        mat.SetColor("_buttonColor", waitColor);
+        buttonParticle.SetVector4("_buttonColor", waitColor);
+        //mat.color = waitColor;
         levelManager.ButtonClick();
     }
 
@@ -78,17 +94,20 @@ public class LevelButton : MonoBehaviour
         bool colorSwitch = false;
         while (t <= resetAnimDuration)
         {
+            t += resetAnimSpeed;
             if (colorSwitch) 
             {
-                //mat.SetColor("buttonColor", waitColor); 
-                mat.color = waitColor;
+                mat.SetColor("_buttonColor", waitColor);
+                buttonParticle.SetVector4("_buttonColor", waitColor);
+                //mat.color = waitColor;
             }
             else 
             {
-                //mat.SetColor("buttonColor", failColor);
-                mat.color = failColor;
+                mat.SetColor("_buttonColor", failColor);
+                buttonParticle.SetVector4("_buttonColor", failColor);
+                //mat.color = failColor;
             }
-            t += resetAnimSpeed;
+            
             yield return new WaitForSeconds(resetAnimSpeed);
             colorSwitch = !colorSwitch;
         }

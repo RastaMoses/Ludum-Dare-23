@@ -52,7 +52,8 @@ public class LevelManager : MonoBehaviour
                     button.ResetButton();
                 }
 
-                buttonCountdown = 0;
+                buttonsActive = 0;
+                buttonTimer = 0;
                 buttonsCounting = false;
             }
         }
