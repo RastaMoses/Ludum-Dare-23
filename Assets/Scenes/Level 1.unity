@@ -1037,8 +1037,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectives:
   - {fileID: 11400000, guid: 59beea47402935342b743551c18290bc, type: 2}
-  timeBetweenObjectives: 2
-  buttonCountdown: 5
+  timeBetweenObjectives: 3
+  buttonCountdown: 10
   buttons:
   - {fileID: 1883526022}
   - {fileID: 835312486}
@@ -1086,8 +1086,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 285885457}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.7, y: 4.23, z: 8.17}
-  m_LocalScale: {x: 4.9068, y: 4.437072, z: 4.9068}
+  m_LocalPosition: {x: 89.8, y: 11.24, z: -113.95}
+  m_LocalScale: {x: 8.853338, y: 8.005809, z: 8.853338}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 887070620}
@@ -2455,8 +2455,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 835312484}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.2, y: 4.23, z: -7}
-  m_LocalScale: {x: 4.9068, y: 4.437072, z: 4.9068}
+  m_LocalPosition: {x: 11.29, y: 52.59, z: -110.53}
+  m_LocalScale: {x: 6.5549936, y: 9.734707, z: 6.5549936}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 887070620}
@@ -5139,8 +5139,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1883526017}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.29, y: 4.23, z: 15.42}
-  m_LocalScale: {x: 4.9068, y: 4.437072, z: 4.9068}
+  m_LocalPosition: {x: 76.9, y: 38.9, z: -0.2}
+  m_LocalScale: {x: 8.1834955, y: 14.93264, z: 8.1834955}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 887070620}
