@@ -16,6 +16,8 @@ public class HP : MonoBehaviour
 
     private void Start()
     {
+        transform.parent = null;
+
         defaultMat = new Material[meshes.Length];
 
         for(int i = 0; i < meshes.Length; i++) {

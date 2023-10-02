@@ -14,10 +14,12 @@ public class Artillery_Behaviour : MonoBehaviour
     private GameObject showMesh, attack;
     private Transform target;
     public GameObject bug;
+    public Animator anim;
 
     private void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        anim = GetComponent<Animator>();
         StartCoroutine(Delay());
     }
 
