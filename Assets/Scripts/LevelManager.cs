@@ -13,12 +13,16 @@ public class LevelManager : MonoBehaviour
     [SerializeField] float buttonCountdown = 10f;
     [SerializeField] List<LevelButton> buttons;
 
+    [Header("Enemies")]
+    [SerializeField] List<GameObject> waves;
+
     //State
     int currentObjective = 0;
     int buttonsActive = 0;
     float buttonTimer;
     bool buttonsCounting;
 
+    public int enemyCounter = 0;
     //Components
     UIManager ui;
 
@@ -52,6 +56,7 @@ public class LevelManager : MonoBehaviour
                 buttonsCounting = false;
             }
         }
+
     }
 
     IEnumerator StartObjective()
@@ -66,6 +71,12 @@ public class LevelManager : MonoBehaviour
         {
             foreach(var button in buttons) { button.Activate(); }
         }
+        if (objectives[currentObjective].spawnWave)
+        {
+            waves[objectives[currentObjective].waveToSpawn].SetActive(true);
+            enemyCounter = waves[objectives[currentObjective].waveToSpawn].GetComponentsInChildren<HP>(false).Length;
+        }
+        
     }
 
     void NextObjective()
@@ -104,6 +115,23 @@ public class LevelManager : MonoBehaviour
             buttonsActive = 0;
         }
     }
+    #endregion
+
+    #region Enemies
+
+    public void EnemyKilled()
+    {
+        if (objectives[currentObjective].killAll)
+        {
+            enemyCounter--;
+            if (enemyCounter == 0)
+            {
+                NextObjective();
+                
+            }
+        }
+    }
+
     #endregion
 
 }
