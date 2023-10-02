@@ -22,6 +22,7 @@ public class LevelManager : MonoBehaviour
     float buttonTimer;
     bool buttonsCounting;
     Coroutine buttonResetCor;
+    public bool loadTitle;
 
     public int enemyCounter = 0;
     //Components
@@ -88,13 +89,23 @@ public class LevelManager : MonoBehaviour
         if (currentObjective == objectives.Count-1) 
         {
             //Win Level
-            Debug.Log("Win Level");
+            StartCoroutine(WinLevel());
+            
         }
         else
         {
             currentObjective++;
             StartCoroutine(StartObjective());
         }
+    }
+
+    IEnumerator WinLevel()
+    {
+        ui.ShowWin();
+        yield return new WaitForSeconds(6);
+        if (loadTitle) { FindObjectOfType<SceneLoader>().LoadTitle(); }
+        else { FindObjectOfType<SceneLoader>().LoadNextLevel(); }
+
     }
 
     #region Buttons

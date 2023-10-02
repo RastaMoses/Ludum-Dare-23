@@ -40,7 +40,7 @@ public class HP : MonoBehaviour
     public void TakeDamage(float damage) {
         if (!damagable) { return; }
         _currentHP -= damage;
-        if(_currentHP <= 40 && isPlayer) { aS.Play(); }
+        if(_currentHP <= 25 && isPlayer) { aS.Play(); }
 
         if (isPlayer) { GetComponent<SFX>().PlayerHit(); StartCoroutine(Invincibility()); GetComponent<FPS_Controller>().ui.UpdateHealth(_currentHP); GetComponent<FPS_Controller>().LoseMultiplier(1); }
         else if (_currentHP > 0) 

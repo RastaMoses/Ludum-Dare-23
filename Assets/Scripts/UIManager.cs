@@ -48,7 +48,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI lifes;
     [SerializeField] GameObject gameOverScreen;
     [SerializeField] AudioClip playerDeathSFX;
+    [SerializeField] Animation damageVignette;
 
+    [SerializeField] Image winScreen;
     [Header("Debug")]
     [SerializeField] float debugHealth = 100f;
     //State
@@ -79,6 +81,7 @@ public class UIManager : MonoBehaviour
         {
             
             health = currentHealth;
+            damageVignette.Play();
 
             if (healthPicCorIsRunning)
             {
@@ -253,4 +256,11 @@ public class UIManager : MonoBehaviour
         float newHealth = Mathf.Clamp(health - dmg, 0, 100);
         UpdateHealth(newHealth);
     }
+
+    public void ShowWin()
+    {
+        winScreen.gameObject.SetActive(true);
+    }
+
+    
 }
