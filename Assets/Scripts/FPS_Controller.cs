@@ -6,6 +6,7 @@ using UnityEngine.VFX;
 
 public class FPS_Controller : MonoBehaviour
 {
+    //Serialize Params
     public Gun gun;
     public UIManager ui;
     public GameObject meleePlatform, slash;
@@ -18,24 +19,31 @@ public class FPS_Controller : MonoBehaviour
     public Animator rightHand, leftHand;
     public VisualEffect vfx;
 
+    
+    
+    //Cached Componens
+    private SFX sfx;
+    private Score score;
+
+    //State
     private Vector3 movement = Vector3.zero, grindDir = Vector3.zero;
     private Vector2 endPos = new Vector2(999, 999);
     private CharacterController controller;
     [HideInInspector] public float currentSpeed, barCharge = 1, dashCharge = 2, railCharge = 4, pointsCooldown = 0;
-    [HideInInspector] public int score, multiplier = 1;
     private int jumpCount = 2;
     private bool canShoot = true, grinding = false, pounding = false, canDash = false, grounded = true, canSlash = true, dashing = false;
-    private SFX sfx;
-
-    private int currentScore = 0;
-
-    private void Start()
+    
+    
+    private void Awake()
     {
+        //Get Comps
         controller = GetComponent<CharacterController>();
         sfx = GetComponent<SFX>();
+        score = GetComponent<Score>();
+    }
+    private void Start()
+    {
         currentSpeed = walkSpeed;
-        ui.UpdateScore(0, 0);
-        ui.UpdateMultiplier(1);
     }
 
     #region Input
@@ -129,7 +137,6 @@ public class FPS_Controller : MonoBehaviour
         ui.UpdateDash(dashCharge);
 
         pointsCooldown -= Time.deltaTime;
-        if(pointsCooldown < 0) { multiplier = 1; ui.UpdateMultiplier(1); }
 
         dashCharge = Mathf.Clamp(dashCharge + Time.deltaTime, 0, 2);
 
@@ -228,13 +235,9 @@ public class FPS_Controller : MonoBehaviour
     }
     public void Kill(int scoreValue) {
         pointsCooldown = 10;
-        multiplier = Mathf.Clamp(multiplier + 1, 0, 10);
         dashCharge = Mathf.Clamp(dashCharge + 1, 0, 2);
         railCharge = Mathf.Clamp(railCharge + 1, 0, 4);
-        score = scoreValue * multiplier;
-        currentScore += score;
-        ui.UpdateMultiplier(multiplier);
-        ui.UpdateScore(scoreValue * multiplier, currentScore);
+        score.IncreaseScore(scoreValue);
+        score.IncreaseMultiplier(1);
     }
-    public void LoseMultiplier(int amnt) { multiplier = Mathf.Clamp(multiplier - amnt, 1, 10); ui.UpdateMultiplier(multiplier); }
 }

@@ -377,6 +377,7 @@ GameObject:
   - component: {fileID: 8050378998493161084}
   - component: {fileID: 8050378998493161085}
   - component: {fileID: 7781957625886383047}
+  - component: {fileID: 3302920982436763971}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -472,9 +473,6 @@ MonoBehaviour:
   groundLayers:
     serializedVersion: 2
     m_Bits: 64
-  shootBlock:
-    serializedVersion: 2
-    m_Bits: 2048
   walkSpeed: 15
   grindSpeed: 25
   jumpStrength: 1
@@ -489,8 +487,6 @@ MonoBehaviour:
   dashCharge: 2
   railCharge: 4
   pointsCooldown: 10
-  score: 700
-  multiplier: 7
 --- !u!143 &8050378998493161082
 CharacterController:
   m_ObjectHideFlags: 0
@@ -682,11 +678,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meshes: []
   deathVFX: {fileID: 0}
-  matFlash: {fileID: 2100000, guid: 82a8b6d2ca793494b9ad0d4a5650411d, type: 2}
+  hitFlashTime: 0.7
   maxHP: 100
   value: 1
   aS: {fileID: 6813513351722750757}
   isPlayer: 1
+  hitVFX: {fileID: 0}
 --- !u!82 &8050378998493161084
 AudioSource:
   m_ObjectHideFlags: 0
@@ -824,6 +821,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startTime: 26.67
+--- !u!114 &3302920982436763971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8050378998493161076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 800150514cea07944b393171dde133d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  multiplierResetTime: 5
+  maxMultiplier: 10
 --- !u!1 &8050378998769250062
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,17 +16,28 @@ public class LevelManager : MonoBehaviour
     [Header("Enemies")]
     [SerializeField] List<GameObject> waves;
 
+    [Header("Misc")]
+    public bool loadTitle;
+
     //State
+    //Objectives
     int currentObjective = 0;
+    bool bonusObjectiveComplete = false;
+
+
+    //Buttons
     int buttonsActive = 0;
     float buttonTimer;
     bool buttonsCounting;
     Coroutine buttonResetCor;
-    public bool loadTitle;
-
-    public int enemyCounter = 0;
+    
+    //Enemy Wave
+    [HideInInspector]public int enemyCounter = 0;
+    
+    
     //Components
     UIManager ui;
+    FPS_Controller player;
 
     private void Awake()
     {
@@ -58,6 +69,7 @@ public class LevelManager : MonoBehaviour
                 
             }
         }
+
 
     }
 
@@ -168,4 +180,21 @@ public class LevelManager : MonoBehaviour
 
     #endregion
 
+    #region Bonus Objectives
+
+    private void BonusObjFailed()
+    {
+
+    }
+
+    private void BonusObjComplete()
+    {
+        bonusObjectiveComplete = true;
+        //Set UI
+        player.GetComponent<Score>().IncreaseScore(objectives[currentObjective].bonusObjectivePoints);
+
+        
+    }
+
+    #endregion
 }

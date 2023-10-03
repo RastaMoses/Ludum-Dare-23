@@ -42,7 +42,13 @@ public class HP : MonoBehaviour
         _currentHP -= damage;
         if(_currentHP <= 25 && isPlayer) { aS.Play(); }
 
-        if (isPlayer) { GetComponent<SFX>().PlayerHit(); StartCoroutine(Invincibility()); GetComponent<FPS_Controller>().ui.UpdateHealth(_currentHP); GetComponent<FPS_Controller>().LoseMultiplier(1); }
+        if (isPlayer) 
+        {
+            GetComponent<SFX>().PlayerHit(); 
+            StartCoroutine(Invincibility()); 
+            GetComponent<FPS_Controller>().ui.UpdateHealth(_currentHP); 
+            GetComponent<Score>().IncreaseMultiplier(-1); 
+        }
         else if (_currentHP > 0) 
         {
             GetComponent<SFX>().EnemyHit();
@@ -54,8 +60,10 @@ public class HP : MonoBehaviour
         }
 
         if (_currentHP <= 0) {
-            if (!isPlayer) { GameObject.FindGameObjectWithTag("Player").transform.root.GetComponent<FPS_Controller>().Kill(value); FindObjectOfType<LevelManager>().EnemyKilled();
-
+            if (!isPlayer) 
+            { 
+                GameObject.FindGameObjectWithTag("Player").transform.root.GetComponent<FPS_Controller>().Kill(value); 
+                FindObjectOfType<LevelManager>().EnemyKilled();
                 Destroy(gameObject);
             }
             else
@@ -63,8 +71,6 @@ public class HP : MonoBehaviour
                 FindObjectOfType<FPS_Controller>().enabled = false;
                 GetComponent<AudioSource>().volume = 0f;
             }
-
-
         }
     }
 

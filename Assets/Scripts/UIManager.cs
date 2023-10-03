@@ -27,6 +27,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI score;
     [SerializeField] TextMeshProUGUI scoreBG;
     [SerializeField] TextMeshProUGUI scoreMultiplier;
+    [SerializeField] Image scoreMultiplierRing;
     [SerializeField] VerticalLayoutGroup verticalLayerGroup;
     [SerializeField] float pointsTime;
     [Header("Objectives")]
@@ -64,6 +65,21 @@ public class UIManager : MonoBehaviour
 
 
     #region Public Update Visuals Functions
+    IEnumerator DeathScreen()
+    {
+        GetComponent<AudioSource>().PlayOneShot(playerDeathSFX);
+        gameOverScreen.SetActive(true);
+        yield return new WaitForSeconds(7);
+        FindObjectOfType<SceneLoader>().ReloadLevel();
+
+    }
+
+    public void ShowWin()
+    {
+        winScreen.gameObject.SetActive(true);
+    }
+
+    #region Health
     public void UpdateHealth(float currentHealth)
     {
         //Slider
@@ -122,15 +138,7 @@ public class UIManager : MonoBehaviour
         }
 
     }
-    IEnumerator DeathScreen()
-    {
-        GetComponent<AudioSource>().PlayOneShot(playerDeathSFX);
-        gameOverScreen.SetActive(true);
-        yield return new WaitForSeconds(7);
-        FindObjectOfType<SceneLoader>().ReloadLevel();
-
-    }
-
+    
     private IEnumerator RedHealthAnimation(float currentHealth)
     {
         print(currentHealth);
@@ -161,7 +169,9 @@ public class UIManager : MonoBehaviour
         healthPicCorIsRunning = false;
 
     }
+    #endregion
 
+    #region Reticle
     public void UpdateDash(float dashAmount)
     {
         if((dashAmount > 1 && dashes[0].enabled == false) || (dashAmount == 2 && dashes[1].enabled == false)) {
@@ -220,6 +230,9 @@ public class UIManager : MonoBehaviour
         platformSlider.fillAmount = platformCharge;
     }
 
+    #endregion
+
+    #region Score
     public void UpdateScore(int newPoints, int newScore)
     {
         score.text = newScore.ToString("0000000");
@@ -241,6 +254,12 @@ public class UIManager : MonoBehaviour
         scoreMultiplier.text = multiplier.ToString();
     }
 
+    public void UpdateMultiplierRing(float value)
+    {
+        scoreMultiplierRing.fillAmount = value;
+    }
+
+    #endregion
     public void UpdateObjectives(string mainObjective, string bonusObjective, int bonusPointsAmount)
     {
         objectiveMain.text = mainObjective;
@@ -250,17 +269,14 @@ public class UIManager : MonoBehaviour
     }
 
     #endregion
-
+    #region Debug
     public void DebugRedHealth(float dmg)
     {
         float newHealth = Mathf.Clamp(health - dmg, 0, 100);
         UpdateHealth(newHealth);
     }
 
-    public void ShowWin()
-    {
-        winScreen.gameObject.SetActive(true);
-    }
+    #endregion
 
-    
+
 }
