@@ -7,6 +7,7 @@ public class Score : MonoBehaviour
     //Serialize Params
     [SerializeField] public float multiplierResetTime = 5f;
     [SerializeField] int maxMultiplier = 10;
+    [SerializeField] int maxScore = 9999999;
 
     //Cached Comps
     UIManager ui;
@@ -29,10 +30,11 @@ public class Score : MonoBehaviour
     }
 
 
-    public void IncreaseScore(int amount)
+    public void IncreaseScore(int amount, string sourceText = "")
     {
         currentScore += amount * multiplier;
-        ui.UpdateScore(amount, currentScore);
+        currentScore = Mathf.Clamp(currentScore, 0, maxScore);
+        ui.UpdateScore(amount * multiplier, currentScore, sourceText);
     }
 
     public void IncreaseMultiplier(int amount)

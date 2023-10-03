@@ -6,27 +6,47 @@ using UnityEngine.VFX;
 
 public class HP : MonoBehaviour
 {
-    public SkinnedMeshRenderer[] meshes;
-    public GameObject deathVFX;
-    public float hitFlashTime = 0.7f;
-    public int maxHP, value = 1;
-    public AudioSource aS;
+    //SerializeParams
+    //public SkinnedMeshRenderer[] meshes;
+    [Header("All")]
+    public int maxHP;
     public bool isPlayer = false;
+    [Header("Enemies")]
+    public int scoreValue;
+    public GameObject hitVFX;
+    public GameObject deathVFX;
+    public string enemyName;
+    [Header("Player")]
+    public float criticalHealthThreshold = 25;
+    public AudioSource aS;
 
+    //public float hitFlashTime = 0.7f;
+
+    //State
     private float _currentHP;
     private bool damagable = true;
     private Material[] defaultMat;
-    public GameObject hitVFX;
+
+    //Cached Components
+    LevelManager level;
+    FPS_Controller fps_controller;
+    private void Awake()
+    {
+        level = FindObjectOfType<LevelManager>();
+        fps_controller = FindObjectOfType<FPS_Controller>();
+    }
 
     private void Start()
     {
         transform.parent = null;
 
+        /*
         defaultMat = new Material[meshes.Length];
 
         for(int i = 0; i < meshes.Length; i++) {
             defaultMat[i] = meshes[i].material;
         }
+        */
 
         _currentHP = maxHP;
     }
@@ -34,20 +54,22 @@ public class HP : MonoBehaviour
 
     private void Update()
     {
-        if(_currentHP > 40) { aS.Stop(); }
+        if(_currentHP > criticalHealthThreshold) { aS.Stop(); }
     }
 
     public void TakeDamage(float damage) {
         if (!damagable) { return; }
         _currentHP -= damage;
-        if(_currentHP <= 25 && isPlayer) { aS.Play(); }
+        if(_currentHP <= criticalHealthThreshold && isPlayer) { aS.Play(); }
 
         if (isPlayer) 
         {
             GetComponent<SFX>().PlayerHit(); 
             StartCoroutine(Invincibility()); 
-            GetComponent<FPS_Controller>().ui.UpdateHealth(_currentHP); 
-            GetComponent<Score>().IncreaseMultiplier(-1); 
+            fps_controller.ui.UpdateHealth(_currentHP); 
+            GetComponent<Score>().IncreaseMultiplier(-1);
+            level.BonusNoDamage();
+
         }
         else if (_currentHP > 0) 
         {
@@ -62,13 +84,13 @@ public class HP : MonoBehaviour
         if (_currentHP <= 0) {
             if (!isPlayer) 
             { 
-                GameObject.FindGameObjectWithTag("Player").transform.root.GetComponent<FPS_Controller>().Kill(value); 
-                FindObjectOfType<LevelManager>().EnemyKilled();
+                fps_controller.Kill(scoreValue, enemyName); 
+                level.EnemyKilled();
                 Destroy(gameObject);
             }
             else
             {
-                FindObjectOfType<FPS_Controller>().enabled = false;
+                fps_controller.enabled = false;
                 GetComponent<AudioSource>().volume = 0f;
             }
         }
@@ -80,7 +102,6 @@ public class HP : MonoBehaviour
     }
     void KillVFX()
     {
-        Debug.Log("Death VFX");
         Instantiate(deathVFX, transform.position, Quaternion.identity);
     }
 

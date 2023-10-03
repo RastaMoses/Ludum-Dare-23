@@ -34,8 +34,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI objectiveMain;
     [SerializeField] TextMeshProUGUI objectiveBonus;
     [SerializeField] TextMeshProUGUI bonusPoints;
+    [SerializeField] TextMeshProUGUI bonusTracker;
     [Header("Health")]
-    [SerializeField] float healthPicChangeThreshhold = 40;
+    [SerializeField] float healthPicChangeThreshhold = 25;
     [SerializeField] Image healthBG;
     [SerializeField] List<Sprite> healthBGs;
     [SerializeField] Image healthPic;
@@ -233,12 +234,12 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region Score
-    public void UpdateScore(int newPoints, int newScore)
+    public void UpdateScore(int newPoints, int newScore, string pointSource = "")
     {
         score.text = newScore.ToString("0000000");
         scoreBG.text = newScore.ToString("0000000");
         var newPointsObj = Instantiate(newPointsPrefab, verticalLayerGroup.transform);
-        newPointsObj.GetComponent<TextMeshProUGUI>().text = newPoints.ToString();
+        newPointsObj.GetComponent<TextMeshProUGUI>().text = pointSource +  " +" + newPoints.ToString();
 
         StartCoroutine(ShowPoints(newPointsObj));
     }
@@ -260,6 +261,8 @@ public class UIManager : MonoBehaviour
     }
 
     #endregion
+
+    #region Objectives
     public void UpdateObjectives(string mainObjective, string bonusObjective, int bonusPointsAmount)
     {
         objectiveMain.text = mainObjective;
@@ -267,6 +270,12 @@ public class UIManager : MonoBehaviour
         objectiveBonus.text = bonusObjective;
         bonusPoints.text = "+" + bonusPointsAmount.ToString();
     }
+
+    public void UpdateBonusTracker(string text)
+    {
+        bonusTracker.text = text;
+    }
+    #endregion
 
     #endregion
     #region Debug

@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d81dc24190bbe84784ae7255aec760a, type: 3}
   m_Name: 1_Buttons
   m_EditorClassIdentifier: 
+  objectiveText: Activate all Buttons
+  bonusObjectiveText: Take No Damage
+  bonusObjectivePoints: 1000
+  buttonsObjective: 1
   killAll: 0
   spawnWave: 0
   waveToSpawn: 0
-  objectiveText: Activate all Buttons quickly!
-  bonusObjectiveText: Take no Damage
-  bonusObjectivePoints: 300
-  buttonsObjective: 1
   timeLimit: 0
   time: 0
-  noDamage: 0
+  noDamage: 1

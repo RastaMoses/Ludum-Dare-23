@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d81dc24190bbe84784ae7255aec760a, type: 3}
-  m_Name: 1_ButtonsTutorial
+  m_Name: EnemiesTutorial
   m_EditorClassIdentifier: 
-  killAll: 0
-  spawnWave: 0
+  objectiveText: Cleanse all Enemies!
+  bonusObjectiveText: Take No Damage
+  bonusObjectivePoints: 10000
+  buttonsObjective: 0
+  killAll: 1
+  spawnWave: 1
   waveToSpawn: 0
-  objectiveText: Activate all Buttons quickly!
-  bonusObjectiveText: Grind to the Top!
-  bonusObjectivePoints: 0
-  buttonsObjective: 1
   timeLimit: 0
   time: 0
-  noDamage: 0
+  noDamage: 1

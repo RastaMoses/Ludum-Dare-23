@@ -22,7 +22,10 @@ public class LevelManager : MonoBehaviour
     //State
     //Objectives
     int currentObjective = 0;
-    bool bonusObjectiveComplete = false;
+    bool bonusObjectiveFailed = false;
+    Coroutine bonusTimerCor;
+    float timeLimitTimer;
+
 
 
     //Buttons
@@ -42,6 +45,7 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         ui = FindObjectOfType<UIManager>();
+        player = FindObjectOfType<FPS_Controller>();
     }
 
 
@@ -81,14 +85,29 @@ public class LevelManager : MonoBehaviour
         //Sound
         //Visuals
         ui.UpdateObjectives(objectives[currentObjective].objectiveText, objectives[currentObjective].bonusObjectiveText, objectives[currentObjective].bonusObjectivePoints);
+        
+        //Start Objective
         if (objectives[currentObjective].buttonsObjective)
         {
-            foreach(var button in buttons) { button.Activate(); }
+            ButtonObjective();
         }
         if (objectives[currentObjective].spawnWave)
         {
-            waves[objectives[currentObjective].waveToSpawn].SetActive(true);
-            enemyCounter = waves[objectives[currentObjective].waveToSpawn].GetComponentsInChildren<HP>(false).Length;
+            WaveObjective();
+        }
+
+        //Start Bonus Objective
+        bonusObjectiveFailed = false;
+
+        if (objectives[currentObjective].timeLimit)
+        {
+            timeLimitTimer = objectives[currentObjective].time;
+            bonusTimerCor = StartCoroutine(BonusTimer());
+            ui.UpdateBonusTracker(timeLimitTimer.ToString("000"));
+        }
+        if (objectives[currentObjective].noDamage)
+        {
+            ui.UpdateBonusTracker("GOOD");
         }
         
     }
@@ -96,19 +115,39 @@ public class LevelManager : MonoBehaviour
     void NextObjective()
     {
         //Award Points
+
+        //Bonus Objectives
+        //Time Limit
+        if (objectives[currentObjective].timeLimit)
+        {
+            if (timeLimitTimer != 0)
+            {
+                BonusObjComplete();
+                StopCoroutine(bonusTimerCor);
+            }
+        }
+        if (objectives[currentObjective].noDamage)
+        {
+            if (!bonusObjectiveFailed)
+            {
+                BonusObjComplete();
+            }
+        }
         //Set Visuals
         //Win Sound
         if (currentObjective == objectives.Count-1) 
         {
-            //Win Level
+            //If last objective of level
             StartCoroutine(WinLevel());
-            
         }
         else
         {
             currentObjective++;
+            //TimeLimit check
+            
             StartCoroutine(StartObjective());
         }
+        
     }
 
     IEnumerator WinLevel()
@@ -180,19 +219,61 @@ public class LevelManager : MonoBehaviour
 
     #endregion
 
+    #region Objectives
+    private void ButtonObjective()
+    {
+        foreach (var button in buttons) { button.Activate(); }
+    }
+
+    private void WaveObjective()
+    {
+        waves[objectives[currentObjective].waveToSpawn].SetActive(true);
+        enemyCounter = waves[objectives[currentObjective].waveToSpawn].GetComponentsInChildren<HP>(false).Length;
+    }
+
+    #endregion
+
     #region Bonus Objectives
+
+    private IEnumerator BonusTimer()
+    {
+        while(timeLimitTimer > 0)
+        {
+            timeLimitTimer -= Time.deltaTime;
+            timeLimitTimer = Mathf.Clamp(timeLimitTimer, 0, objectives[currentObjective].time);
+            yield return null;
+            ui.UpdateBonusTracker(timeLimitTimer.ToString("000"));
+        }
+        if (bonusObjectiveFailed)
+        {
+            BonusObjFailed();
+        }
+    }
+
+    public void BonusNoDamage()
+    {
+        if (objectives[currentObjective].noDamage)
+        {
+            BonusObjFailed();
+        }
+    }
+
+
 
     private void BonusObjFailed()
     {
+        bonusObjectiveFailed = true;
+        ui.UpdateBonusTracker("FAILED");
 
+        //UI
     }
 
     private void BonusObjComplete()
     {
-        bonusObjectiveComplete = true;
-        //Set UI
-        player.GetComponent<Score>().IncreaseScore(objectives[currentObjective].bonusObjectivePoints);
-
+        //Give Score
+        player.GetComponent<Score>().IncreaseScore(objectives[currentObjective].bonusObjectivePoints, "Bonus");
+        
+        //UI
         
     }
 

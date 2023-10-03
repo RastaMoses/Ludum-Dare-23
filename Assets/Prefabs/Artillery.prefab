@@ -50,16 +50,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b539163b1f2c8824ba62c9fe236a748e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshes:
-  - {fileID: 1735145462938247046}
+  maxHP: 5
+  isPlayer: 0
+  scoreValue: 1000
+  hitVFX: {fileID: 224849402177860947, guid: e3aa1737bcdc37e4fbb8629c8a8c53b5, type: 3}
   deathVFX: {fileID: 7422400498934496593, guid: 328e39bb206d67948a54036dfced6d68,
     type: 3}
-  hitFlashTime: 2
-  maxHP: 5
-  value: 1000
+  enemyName: Trojan
+  criticalHealthThreshold: 25
   aS: {fileID: 0}
-  isPlayer: 0
-  hitVFX: {fileID: 224849402177860947, guid: e3aa1737bcdc37e4fbb8629c8a8c53b5, type: 3}
 --- !u!65 &3713237484316251035
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -348,12 +347,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7674c9b07a28ab54d899567b59e6dafe, type: 3}
---- !u!137 &1735145462938247046 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 9142610251112232020, guid: 7674c9b07a28ab54d899567b59e6dafe,
-    type: 3}
-  m_PrefabInstance: {fileID: 7418952576125840338}
-  m_PrefabAsset: {fileID: 0}
 --- !u!95 &3469645325652875970 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 6256557637925695760, guid: 7674c9b07a28ab54d899567b59e6dafe,

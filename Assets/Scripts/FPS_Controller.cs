@@ -233,11 +233,11 @@ public class FPS_Controller : MonoBehaviour
         sfx.RailGrind(false);
         grinding = false;
     }
-    public void Kill(int scoreValue) {
+    public void Kill(int scoreValue, string enemyName) {
         pointsCooldown = 10;
         dashCharge = Mathf.Clamp(dashCharge + 1, 0, 2);
         railCharge = Mathf.Clamp(railCharge + 1, 0, 4);
-        score.IncreaseScore(scoreValue);
+        score.IncreaseScore(scoreValue, enemyName);
         score.IncreaseMultiplier(1);
     }
 }

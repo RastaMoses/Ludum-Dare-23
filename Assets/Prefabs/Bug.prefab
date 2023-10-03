@@ -51,16 +51,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b539163b1f2c8824ba62c9fe236a748e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshes:
-  - {fileID: 7017635948716730921}
+  maxHP: 1
+  isPlayer: 0
+  scoreValue: 100
+  hitVFX: {fileID: 224849402177860947, guid: e3aa1737bcdc37e4fbb8629c8a8c53b5, type: 3}
   deathVFX: {fileID: 6475270385787529721, guid: 8bd5ddb10772cd9418f8f87f789332ed,
     type: 3}
-  hitFlashTime: 2
-  maxHP: 1
-  value: 100
+  enemyName: Bug
+  criticalHealthThreshold: 25
   aS: {fileID: 0}
-  isPlayer: 0
-  hitVFX: {fileID: 224849402177860947, guid: e3aa1737bcdc37e4fbb8629c8a8c53b5, type: 3}
 --- !u!114 &8710151745597930130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,12 +409,6 @@ SkinnedMeshRenderer:
 --- !u!4 &5730711453703179009 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4765045751197450151, guid: d802d8cf3ff355547a70314c60fac3fe,
-    type: 3}
-  m_PrefabInstance: {fileID: 983830261745988774}
-  m_PrefabAsset: {fileID: 0}
---- !u!137 &7017635948716730921 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 7837638702307450511, guid: d802d8cf3ff355547a70314c60fac3fe,
     type: 3}
   m_PrefabInstance: {fileID: 983830261745988774}
   m_PrefabAsset: {fileID: 0}
