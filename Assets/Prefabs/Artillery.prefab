@@ -57,6 +57,9 @@ MonoBehaviour:
   deathVFX: {fileID: 7422400498934496593, guid: 328e39bb206d67948a54036dfced6d68,
     type: 3}
   enemyName: Trojan
+  healOrbsSpawned: 4
+  healOrbPrefab: {fileID: 8710151745597930131, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
+    type: 3}
   criticalHealthThreshold: 25
   aS: {fileID: 0}
 --- !u!65 &3713237484316251035

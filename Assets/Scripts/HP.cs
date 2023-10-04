@@ -16,6 +16,8 @@ public class HP : MonoBehaviour
     public GameObject hitVFX;
     public GameObject deathVFX;
     public string enemyName;
+    public int healOrbsSpawned = 1;
+    [SerializeField] GameObject healOrbPrefab;
     [Header("Player")]
     public float criticalHealthThreshold = 25;
     public AudioSource aS;
@@ -60,7 +62,8 @@ public class HP : MonoBehaviour
     public void TakeDamage(float damage) {
         if (!damagable) { return; }
         _currentHP -= damage;
-        if(_currentHP <= criticalHealthThreshold && isPlayer) { aS.Play(); }
+        _currentHP = Mathf.Clamp(_currentHP, 0, maxHP);
+        if (_currentHP <= criticalHealthThreshold && isPlayer) { aS.Play(); }
 
         if (isPlayer) 
         {
@@ -69,7 +72,6 @@ public class HP : MonoBehaviour
             fps_controller.ui.UpdateHealth(_currentHP); 
             GetComponent<Score>().IncreaseMultiplier(-1);
             level.BonusNoDamage();
-
         }
         else if (_currentHP > 0) 
         {
@@ -86,6 +88,7 @@ public class HP : MonoBehaviour
             { 
                 fps_controller.Kill(scoreValue, enemyName); 
                 level.EnemyKilled();
+                SpawnHealOrbs();
                 Destroy(gameObject);
             }
             else
@@ -93,6 +96,17 @@ public class HP : MonoBehaviour
                 fps_controller.enabled = false;
                 GetComponent<AudioSource>().volume = 0f;
             }
+        }
+    }
+
+    public void Heal(float amount)
+    {
+        if (isPlayer)
+        {
+            //GetComponent<SFX>().PlayerHit();
+            _currentHP += amount;
+            _currentHP = Mathf.Clamp(_currentHP, 0, maxHP);
+            fps_controller.ui.UpdateHealth(_currentHP);
         }
     }
 
@@ -116,5 +130,14 @@ public class HP : MonoBehaviour
     public void InvulnerableSpawn()
     {
         StartCoroutine(Invincibility());
+    }
+
+    private void SpawnHealOrbs()
+    {
+        for (int i = 0; i < healOrbsSpawned; i++) 
+        {
+            var orb = Instantiate(healOrbPrefab, transform.position, Quaternion.identity);
+
+        }
     }
 }

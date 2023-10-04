@@ -58,6 +58,9 @@ MonoBehaviour:
   deathVFX: {fileID: 1325805225324879513, guid: 622bbaa2b2e3a344e90072ebb7c50e84,
     type: 3}
   enemyName: Virus
+  healOrbsSpawned: 2
+  healOrbPrefab: {fileID: 2781949332322109927, guid: b9b11b42fe88d6240bf507edc9bf56f5,
+    type: 3}
   criticalHealthThreshold: 25
   aS: {fileID: 0}
 --- !u!114 &264521879138016381
