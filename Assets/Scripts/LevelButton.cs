@@ -83,8 +83,11 @@ public class LevelButton : MonoBehaviour
 
     public void ResetButton()
     {
-        
         StartCoroutine(FailAnim());
+    }
+    public void StopAnimation()
+    {
+        StopAllCoroutines();
     }
 
     IEnumerator FailAnim()

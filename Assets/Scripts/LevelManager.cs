@@ -31,7 +31,7 @@ public class LevelManager : MonoBehaviour
     //Buttons
     int buttonsActive = 0;
     float buttonTimer;
-    bool buttonsCounting;
+    bool buttonCountdownRunning;
     Coroutine buttonResetCor;
     
     //Enemy Wave
@@ -59,7 +59,7 @@ public class LevelManager : MonoBehaviour
     void Update()
     {
         //Buttons Countdown
-        if (buttonsCounting)
+        if (buttonCountdownRunning)
         {
             buttonTimer += Time.deltaTime;
             if (buttonTimer >= buttonCountdown)
@@ -68,9 +68,8 @@ public class LevelManager : MonoBehaviour
                 {
                     button.ResetButton();
                 }
-                buttonsCounting = false;
+                buttonCountdownRunning = false;
                 buttonResetCor= StartCoroutine(ButtonReset());
-                
             }
         }
 
@@ -164,14 +163,16 @@ public class LevelManager : MonoBehaviour
     public void ButtonClick()
     {
         buttonTimer = 0;
-        buttonsCounting = true;
+        buttonCountdownRunning = true;
         buttonsActive++;
         if (buttonResetCor != null)
         {
             StopCoroutine(buttonResetCor);
+
         }
         foreach (var button in  buttons)
         {
+            button.StopAnimation();
             if (button.pressed)
             {
                 button.SetWaitColor();
@@ -189,7 +190,7 @@ public class LevelManager : MonoBehaviour
             }
             //all buttons activated
             NextObjective();
-            buttonsCounting = false;
+            buttonCountdownRunning = false;
             buttonsActive = 0;
         }
     }
@@ -199,7 +200,7 @@ public class LevelManager : MonoBehaviour
         yield return new WaitForSeconds(buttons[0].resetAnimDuration);
         buttonsActive = 0;
         buttonTimer = 0;
-        buttonsCounting = false;
+        buttonCountdownRunning = false;
     }
     #endregion
 
