@@ -41,7 +41,7 @@ public class HealOrb : MonoBehaviour
             distance = Vector3.Distance(transform.position, player.transform.position);
 
             //If in range follow player
-            if(distance <= pickupRange)
+            if(distance <= pickupRange && !player.GetComponent<HP>().fullHP)
             {
                 FollowPlayer();
             }
@@ -69,9 +69,9 @@ public class HealOrb : MonoBehaviour
         inRange = true;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !player.GetComponent<HP>().fullHP)
         {
             player.GetComponent<HP>().Heal(healAmount);
             Instantiate(popVFX, transform.position, Quaternion.identity);

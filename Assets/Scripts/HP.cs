@@ -26,6 +26,7 @@ public class HP : MonoBehaviour
 
     //State
     private float _currentHP;
+    [HideInInspector]public bool fullHP;
     private bool damagable = true;
     private Material[] defaultMat;
 
@@ -56,6 +57,8 @@ public class HP : MonoBehaviour
 
     private void Update()
     {
+        if(_currentHP == maxHP) { fullHP = true; }
+        else { fullHP = false; }
         if(_currentHP > criticalHealthThreshold) { aS.Stop(); }
     }
 
