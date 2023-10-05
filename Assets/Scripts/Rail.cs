@@ -6,22 +6,32 @@ using UnityEngine.VFX;
 public class Rail : MonoBehaviour
 {
     public AnimationCurve curve;
-    public bool friendly;
-    public Color32 nice, evil;
+    public Color32 friendlyColor, decayColor, corruptedColor;
     public LayerMask layerMask, evilMask;
     public BoxCollider col;
-    public Vector3 dir;
-    public float friendlyTime, damage;
+    public float bugCorruptionMultiplier = 2;
+    public float friendlyTime, decayTime, damage = 5;
     public VisualEffect vfx;
 
-    private bool damaged = true;
-    private float _friendlyTime;
+
+    //State
+    [HideInInspector] public Vector3 dir;
+    float stableTime = 10;
+    public bool friendly, stable;
+    private bool damageEnemy = true;
+    private float _decayTime;
+    private float _stableTime;
+    private float currentBugMultiplier = 1;
     private Vector3 hitPoint;
+    [HideInInspector]public bool bugCorrupting;
 
     private void Start()
     {
         StartCoroutine(Small());
-        _friendlyTime = friendlyTime;
+        stable = true;
+        friendly = true;
+        _stableTime = stableTime;
+        _decayTime = decayTime;
 
         //If shoots straight, get direction of line. Else, run ray-march algorithm
         if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 999, layerMask)) {
@@ -39,12 +49,12 @@ public class Rail : MonoBehaviour
 
             Collider[] _col = Physics.OverlapSphere(transform.position, 0.1f);
             foreach(Collider collider in _col) { 
-                if(collider.gameObject.layer == 11) { friendly = false; SetColor(evil); damage = 5; return; }
+                if(collider.gameObject.layer == evilMask) { stable = false; return; }
             }
             _col = Physics.OverlapSphere(hitPoint, 0.1f);
             foreach (Collider collider in _col)
             {
-                if (collider.gameObject.layer == 11) { friendly = false; SetColor(evil); damage = 5; return; }
+                if (collider.gameObject.layer == evilMask) { stable = false; return; }
             }
         }
         else
@@ -57,8 +67,28 @@ public class Rail : MonoBehaviour
     {
         if (friendly)
         {
-            _friendlyTime -= Time.deltaTime;
-            if (_friendlyTime < 0) { friendly = false; SetColor(evil); damage = 5; }
+            if(stable)
+            {
+                _stableTime -= Time.deltaTime;
+
+                if (_stableTime < 0)
+                {
+                    stable = false;
+                }
+            }
+            else
+            {
+                //Lerp Color to decay color
+                _decayTime -= Time.deltaTime * currentBugMultiplier;
+                Color newColor = Color.Lerp(decayColor, friendlyColor, _decayTime / decayTime);
+                print(newColor);
+                vfx.SetVector4("color", newColor);
+                if (_decayTime < 0)
+                {
+                    friendly = false;
+                    SetColor(corruptedColor);
+                }
+            }
         }
     }
 
@@ -70,18 +100,22 @@ public class Rail : MonoBehaviour
         if(other.tag == "Player" && !friendly) {
             other.GetComponent<HP>().TakeDamage(damage);
         }
-        if(other.tag == "Enemy" && friendly && damaged && other.TryGetComponent<HP>(out HP _hp)) {
+        //On Enemy hit
+        if(other.tag == "Enemy" && friendly && damageEnemy && other.TryGetComponent<HP>(out HP _hp)) {
             _hp.TakeDamage(damage);
-            damaged = false;
+            damageEnemy = false;
         }
     }
 
     public void SetColor(Color32 colour) {
         vfx.SetVector4("color", new Vector4(colour.r, colour.g, colour.b, colour.a));
     }
-    public void SetDamaged(bool dmg) { damaged = dmg; }
-    public void DecayLine(float amnt) {
-        _friendlyTime -= amnt;
+    public void SetDamaged(bool dmg) { damageEnemy = dmg; }
+    public void DecayLine() 
+    {
+        bugCorrupting = true;
+        stable = false;
+        currentBugMultiplier = bugCorruptionMultiplier;
     }
 
     private IEnumerator Small() {

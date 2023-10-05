@@ -29,7 +29,7 @@ public class FPS_Controller : MonoBehaviour
     private Vector3 movement = Vector3.zero, grindDir = Vector3.zero;
     private Vector2 endPos = new Vector2(999, 999);
     private CharacterController controller;
-    [HideInInspector] public float currentSpeed, barCharge = 1, dashCharge = 2, railCharge = 4, pointsCooldown = 0;
+    [HideInInspector] public float currentSpeed, barCharge = 1, dashCharge = 2, railCharge = 4;
     private int jumpCount = 2;
     private bool canShoot = true, grinding = false, pounding = false, canDash = false, grounded = true, canSlash = true, dashing = false;
     
@@ -136,7 +136,6 @@ public class FPS_Controller : MonoBehaviour
         ui.UpdatePlatform(barCharge);
         ui.UpdateDash(dashCharge);
 
-        pointsCooldown -= Time.deltaTime;
 
         dashCharge = Mathf.Clamp(dashCharge + Time.deltaTime, 0, 2);
 
@@ -234,7 +233,6 @@ public class FPS_Controller : MonoBehaviour
         grinding = false;
     }
     public void Kill(int scoreValue, string enemyName) {
-        pointsCooldown = 10;
         dashCharge = Mathf.Clamp(dashCharge + 1, 0, 2);
         railCharge = Mathf.Clamp(railCharge + 1, 0, 4);
         score.IncreaseScore(scoreValue, enemyName);

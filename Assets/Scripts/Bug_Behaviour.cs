@@ -6,6 +6,7 @@ public class Bug_Behaviour : MonoBehaviour
 {
     public float speed = 3;
     public AnimationCurve yumCurve, pulseCurve;
+    public float railDetectionRange = 5;
 
     private Transform target;
     private Vector3 startPos;
@@ -26,10 +27,10 @@ public class Bug_Behaviour : MonoBehaviour
         transform.LookAt(target);
         transform.position += transform.forward * speed * Time.deltaTime;
 
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, railDetectionRange);
         foreach (Collider col in hitColliders)
         {
-            if (col.gameObject.layer == 8 && col.transform.root.TryGetComponent<Rail>(out Rail _rail) && _rail.friendly) {
+            if (col.gameObject.layer == 8 && col.transform.root.TryGetComponent<Rail>(out Rail _rail) && _rail.friendly && !_rail.bugCorrupting) {
                 targetRail = _rail;
                 target = col.transform; 
                 chasingPlayer = false; 
@@ -49,7 +50,7 @@ public class Bug_Behaviour : MonoBehaviour
             return;
         }
 
-        if (targetRail.friendly) { targetRail.DecayLine(Time.deltaTime); }
+        if (targetRail.friendly) { targetRail.DecayLine(); }
         else { timer = 0; targetRail = null; target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>(); chasingPlayer = true; }
     }
 }

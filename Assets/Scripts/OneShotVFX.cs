@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class OneShotVFX : MonoBehaviour
 {
+    [SerializeField] private float timeToDeath = 3f;
     private void Start()
     {
         StartCoroutine(Die());
@@ -13,7 +14,7 @@ public class OneShotVFX : MonoBehaviour
     IEnumerator Die()
     {
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(timeToDeath);
         Destroy(gameObject);
     }
 }

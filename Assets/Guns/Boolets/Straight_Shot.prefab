@@ -80,13 +80,15 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  friendly: 1
-  nice:
+  friendlyColor:
     serializedVersion: 2
-    rgba: 4294967040
-  evil:
+    rgba: 16776960
+  decayColor:
     serializedVersion: 2
-    rgba: 4278190335
+    rgba: 589879
+  corruptedColor:
+    serializedVersion: 2
+    rgba: 131327
   layerMask:
     serializedVersion: 2
     m_Bits: 2240
@@ -94,10 +96,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   col: {fileID: 6733410975018143199}
-  dir: {x: 0, y: 0, z: 0}
-  friendlyTime: 15
-  damage: 1
+  bugCorruptionMultiplier: 2
+  friendlyTime: 8
+  decayTime: 5
+  damage: 5
   vfx: {fileID: 2718631986177781051}
+  dir: {x: 0, y: 0, z: 0}
+  friendly: 1
+  stable: 0
+  bugCorrupting: 0
 --- !u!54 &3452555423304693003
 Rigidbody:
   m_ObjectHideFlags: 0

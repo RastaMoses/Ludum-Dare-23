@@ -67,7 +67,7 @@ private IEnumerator Delay() {
         Collider[] colliders = Physics.OverlapSphere(attack.transform.position, attack.transform.localScale.x / 2);
         foreach(Collider col in colliders) { 
             if(col.transform.root.TryGetComponent<HP>(out HP _hp) && _hp.isPlayer) { _hp.TakeDamage(damage); }
-            if(col.transform.root.TryGetComponent<Rail>(out Rail _rail)) { _rail.friendly = false; _rail.SetColor(new Color32(255, 0, 0, 255)); }
+            //if(col.transform.root.TryGetComponent<Rail>(out Rail _rail)) { _rail.friendly = false; _rail.SetColor(new Color32(255, 0, 0, 255)); }
         }
 
         Destroy(attack);

@@ -42,7 +42,6 @@ public class LevelButton : MonoBehaviour
 
         mat.SetColor("_buttonColor", offColor);
         buttonParticle.SetVector4("_buttonColor", offColor);
-        //mat.color = offColor;
     }
 
 
@@ -61,17 +60,14 @@ public class LevelButton : MonoBehaviour
         //Activate Visuals
         mat.SetColor("_buttonColor", activeColor);
         buttonParticle.SetVector4("_buttonColor", activeColor);
-        //mat.color = activeColor;
     }
 
     public void Deactivate()
     {
         interactable = false;
         //Deactivate Visuals
-        
         mat.SetColor("_buttonColor", offColor);
         buttonParticle.SetVector4("_buttonColor", offColor);
-        //mat.color = offColor;
     }
 
     public void Pressed()
@@ -81,7 +77,6 @@ public class LevelButton : MonoBehaviour
         interactable = false;
         mat.SetColor("_buttonColor", waitColor);
         buttonParticle.SetVector4("_buttonColor", waitColor);
-        //mat.color = waitColor;
         levelManager.ButtonClick();
     }
 
@@ -103,13 +98,11 @@ public class LevelButton : MonoBehaviour
             {
                 mat.SetColor("_buttonColor", waitColor);
                 buttonParticle.SetVector4("_buttonColor", waitColor);
-                //mat.color = waitColor;
             }
             else 
             {
                 mat.SetColor("_buttonColor", failColor);
                 buttonParticle.SetVector4("_buttonColor", failColor);
-                //mat.color = failColor;
             }
             
             yield return new WaitForSeconds(resetAnimSpeed);
