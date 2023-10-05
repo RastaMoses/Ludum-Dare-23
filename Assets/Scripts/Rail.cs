@@ -29,7 +29,6 @@ public class Rail : MonoBehaviour
     {
         StartCoroutine(Small());
         stable = true;
-        friendly = true;
         _stableTime = stableTime;
         _decayTime = decayTime;
 

@@ -161,7 +161,7 @@ public class UIManager : MonoBehaviour
     IEnumerator HealthPicAnimation()
     {
         healthPicCorIsRunning = true;
-        healthBG.sprite = healthBGs[1];
+        healthBG.sprite = healthBGs[0];
         healthPic.sprite = healthPics[2];
         yield return new WaitForSeconds(healthAnimTime);
         healthBG.sprite = healthBGs[0];

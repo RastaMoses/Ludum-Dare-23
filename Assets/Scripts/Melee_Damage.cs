@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Melee_Damage : MonoBehaviour
 {
+    public int damage;
     void Start()
     {
         StartCoroutine(Kill());
@@ -13,7 +14,7 @@ public class Melee_Damage : MonoBehaviour
     {
         if(other.tag == "Enemy" && other.transform.root.TryGetComponent<HP>(out HP _hp)) {
             Debug.Log("Enemy Hit");
-            _hp.TakeDamage(2);
+            _hp.TakeDamage(damage);
         }
     }
 
