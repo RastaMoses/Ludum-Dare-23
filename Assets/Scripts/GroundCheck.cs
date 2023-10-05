@@ -6,13 +6,14 @@ public class GroundCheck : MonoBehaviour
 {
     public FPS_Controller controller;
 
+
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject != controller.gameObject) { controller.Ground(); }
+        if(other.gameObject != controller.gameObject && other.gameObject.layer == controller.groundLayers) { controller.Ground(); }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject != controller.gameObject) { controller.UnGround(); }
+        if (other.gameObject != controller.gameObject && other.gameObject.layer == controller.groundLayers) { controller.UnGround(); }
     }
 }

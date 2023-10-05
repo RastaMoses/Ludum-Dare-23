@@ -14,8 +14,8 @@ public class UIManager : MonoBehaviour
     //Serialize Params
     [Header("UI Elements")]
     [Header("Reticle")]
-    [SerializeField] [Range(0,4)]float debugGun;
-    [SerializeField] [Range(0,1)]float debugPlatform;
+    //[SerializeField] [Range(0,4)]float debugGun;
+    //[SerializeField] [Range(0,1)]float debugPlatform;
     [SerializeField] Image crosshair;
     [SerializeField] List<Image> dashes;
     [SerializeField] Image platformChargeSprite;
