@@ -48,12 +48,12 @@ public class Rail : MonoBehaviour
 
             Collider[] _col = Physics.OverlapSphere(transform.position, 0.1f);
             foreach(Collider collider in _col) { 
-                if(collider.gameObject.layer == evilMask) { stable = false; return; }
+                if(collider.gameObject.layer == 11) { stable = false; return; }
             }
             _col = Physics.OverlapSphere(hitPoint, 0.1f);
             foreach (Collider collider in _col)
             {
-                if (collider.gameObject.layer == evilMask) { stable = false; return; }
+                if (collider.gameObject.layer == 11) { stable = false; return; }
             }
         }
         else

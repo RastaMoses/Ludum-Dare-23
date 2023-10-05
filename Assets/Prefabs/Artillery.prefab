@@ -58,10 +58,11 @@ MonoBehaviour:
     type: 3}
   enemyName: Trojan
   healOrbsSpawned: 4
-  healOrbPrefab: {fileID: 8710151745597930131, guid: 22bcbabd357b84d4bad32f548ee4ebc4,
+  healOrbPrefab: {fileID: 2781949332322109927, guid: b9b11b42fe88d6240bf507edc9bf56f5,
     type: 3}
   criticalHealthThreshold: 25
   aS: {fileID: 0}
+  fullHP: 0
 --- !u!65 &3713237484316251035
 BoxCollider:
   m_ObjectHideFlags: 0
