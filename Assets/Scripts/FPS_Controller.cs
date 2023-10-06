@@ -7,6 +7,8 @@ using UnityEngine.VFX;
 public class FPS_Controller : MonoBehaviour
 {
     //Serialize Params
+    [Header("Player Controls")]
+    [SerializeField] bool platformsEnabled;
     public Gun gun;
     public UIManager ui;
     public GameObject meleePlatform, slash;
@@ -93,7 +95,7 @@ public class FPS_Controller : MonoBehaviour
         }
     }
     public void Platform(InputAction.CallbackContext ctx) {
-        if (ctx.performed && barCharge == 1)
+        if (ctx.performed && barCharge == 1 && platformsEnabled)
         {
             barCharge = 0;
             Melee_Platform plat = FindObjectOfType<Melee_Platform>();
