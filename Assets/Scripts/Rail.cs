@@ -5,14 +5,16 @@ using UnityEngine.VFX;
 
 public class Rail : MonoBehaviour
 {
+    //Serialize Params
     public AnimationCurve curve;
     public Color32 friendlyColor, decayColor, corruptedColor;
     public LayerMask layerMask, evilMask;
     public BoxCollider col;
     public float bugCorruptionMultiplier = 2;
-    public float friendlyTime, decayTime, damage = 5;
+    public float friendlyTime, decayTime, enemyDamage = 5;
     public VisualEffect vfx;
-
+    public int playerDamage;
+    public bool enemyShot;
 
     //State
     [HideInInspector] public Vector3 dir;
@@ -97,11 +99,11 @@ public class Rail : MonoBehaviour
             other.GetComponent<FPS_Controller>().BeginGrind(dir, transform.position, hitPoint);
         }
         if(other.tag == "Player" && !friendly) {
-            other.GetComponent<HP>().TakeDamage(damage);
+            other.GetComponent<HP>().TakeDamage(playerDamage);
         }
         //On Enemy hit
         if(other.tag == "Enemy" && friendly && damageEnemy && other.TryGetComponent<HP>(out HP _hp)) {
-            _hp.TakeDamage(damage);
+            _hp.TakeDamage(enemyDamage);
             damageEnemy = false;
         }
     }

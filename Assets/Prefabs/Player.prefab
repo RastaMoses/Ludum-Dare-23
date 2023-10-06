@@ -464,6 +464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c62a725d1e583b94b9f392c05db8f9a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  platformsEnabled: 0
   gun: {fileID: 11400000, guid: 36f361f715077d14892e2cbfea6e4bfd, type: 2}
   ui: {fileID: 0}
   meleePlatform: {fileID: 3953979418310842807, guid: 60274145f3c3dd743b612e1ec96778b5,
@@ -486,7 +487,6 @@ MonoBehaviour:
   barCharge: 1
   dashCharge: 2
   railCharge: 4
-  pointsCooldown: 10
 --- !u!143 &8050378998493161082
 CharacterController:
   m_ObjectHideFlags: 0
@@ -676,14 +676,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b539163b1f2c8824ba62c9fe236a748e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshes: []
-  deathVFX: {fileID: 0}
-  hitFlashTime: 0.7
   maxHP: 100
-  value: 1
-  aS: {fileID: 6813513351722750757}
   isPlayer: 1
+  scoreValue: 0
   hitVFX: {fileID: 0}
+  deathVFX: {fileID: 0}
+  enemyName: 
+  healOrbsSpawned: 1
+  healOrbPrefab: {fileID: 0}
+  criticalHealthThreshold: 25
+  aS: {fileID: 6813513351722750757}
+  fullHP: 0
 --- !u!82 &8050378998493161084
 AudioSource:
   m_ObjectHideFlags: 0
@@ -693,7 +696,8 @@ AudioSource:
   m_GameObject: {fileID: 8050378998493161076}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: cac7047cd44b20c4bb817ba3889e606b,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 8fbb4dd4b83748a4abce2442cddad658, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -835,6 +839,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   multiplierResetTime: 5
   maxMultiplier: 10
+  maxScore: 9999999
 --- !u!1 &8050378998769250062
 GameObject:
   m_ObjectHideFlags: 0

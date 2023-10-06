@@ -99,7 +99,7 @@ MonoBehaviour:
   bugCorruptionMultiplier: 2
   friendlyTime: 8
   decayTime: 5
-  damage: 5
+  damage: 1
   vfx: {fileID: 2718631986177781051}
   dir: {x: 0, y: 0, z: 0}
   friendly: 1

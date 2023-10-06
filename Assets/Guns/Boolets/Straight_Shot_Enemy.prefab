@@ -72,8 +72,9 @@ MonoBehaviour:
   bugCorruptionMultiplier: 2
   friendlyTime: 0
   decayTime: 0
-  damage: 10
+  enemyDamage: 5
   vfx: {fileID: 6778119194501965432}
+  playerDamage: 1
   dir: {x: 0, y: 0, z: 0}
   friendly: 0
   stable: 0
