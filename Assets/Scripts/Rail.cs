@@ -10,11 +10,14 @@ public class Rail : MonoBehaviour
     public Color32 friendlyColor, decayColor, corruptedColor;
     public LayerMask layerMask, evilMask;
     public BoxCollider col;
-    public float bugCorruptionMultiplier = 2;
-    public float friendlyTime, decayTime, enemyDamage = 5;
     public VisualEffect vfx;
-    public int playerDamage;
+    public float bugCorruptionMultiplier = 2;
+    public float friendlyTime, decayTime;
+    public int playerShotDamage = 1;
+    public int enemyShotDamage = 10;
+    public int railDamage = 5;
     public bool enemyShot;
+    public float initialDamageDuration = 0.2f;
 
     //State
     [HideInInspector] public Vector3 dir;
@@ -23,12 +26,21 @@ public class Rail : MonoBehaviour
     private bool damageEnemy = true;
     private float _decayTime;
     private float _stableTime;
+    private int _currentShotDmg;
     private float currentBugMultiplier = 1;
     private Vector3 hitPoint;
     [HideInInspector]public bool bugCorrupting;
 
     private void Start()
     {
+        if (friendly)
+        {
+            _currentShotDmg = playerShotDamage;
+        }
+        else
+        {
+            _currentShotDmg = enemyShotDamage;
+        }
         StartCoroutine(Small());
         stable = true;
         _stableTime = stableTime;
@@ -99,11 +111,11 @@ public class Rail : MonoBehaviour
             other.GetComponent<FPS_Controller>().BeginGrind(dir, transform.position, hitPoint);
         }
         if(other.tag == "Player" && !friendly) {
-            other.GetComponent<HP>().TakeDamage(playerDamage);
+            other.GetComponent<HP>().TakeDamage(enemyShotDamage);
         }
         //On Enemy hit
         if(other.tag == "Enemy" && friendly && damageEnemy && other.TryGetComponent<HP>(out HP _hp)) {
-            _hp.TakeDamage(enemyDamage);
+            _hp.TakeDamage(_currentShotDmg);
             damageEnemy = false;
         }
     }
@@ -122,5 +134,13 @@ public class Rail : MonoBehaviour
     private IEnumerator Small() {
         yield return new WaitForSeconds(0.1f);
         col.size = new Vector3(1.5f, col.size.y, 1.5f);
+        _currentShotDmg = railDamage;
+    }
+
+    private IEnumerator InitialDamage() 
+    {
+        yield return new WaitForSeconds(initialDamageDuration);
+        _currentShotDmg = railDamage;
+        damageEnemy = false;
     }
 }
