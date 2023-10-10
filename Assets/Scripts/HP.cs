@@ -16,7 +16,7 @@ public class HP : MonoBehaviour
     public GameObject hitVFX;
     public GameObject deathVFX;
     public string enemyName;
-    public int healOrbsSpawned = 1;
+    public int maxHealOrbsSpawned = 1;
     [SerializeField] GameObject healOrbPrefab;
     [Header("Player")]
     public float criticalHealthThreshold = 25;
@@ -137,7 +137,8 @@ public class HP : MonoBehaviour
 
     private void SpawnHealOrbs()
     {
-        for (int i = 0; i < healOrbsSpawned; i++) 
+        int healOrbAmount = Random.Range(0, maxHealOrbsSpawned);
+        for (int i = 0; i < healOrbAmount; i++) 
         {
             var orb = Instantiate(healOrbPrefab, transform.position, Quaternion.identity);
 

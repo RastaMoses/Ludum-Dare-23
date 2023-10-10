@@ -85,10 +85,10 @@ MonoBehaviour:
     rgba: 16776960
   decayColor:
     serializedVersion: 2
-    rgba: 589879
+    rgba: 255
   corruptedColor:
     serializedVersion: 2
-    rgba: 131327
+    rgba: 255
   layerMask:
     serializedVersion: 2
     m_Bits: 2240
@@ -96,11 +96,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   col: {fileID: 6733410975018143199}
+  vfx: {fileID: 2718631986177781051}
   bugCorruptionMultiplier: 2
   friendlyTime: 8
   decayTime: 5
-  damage: 1
-  vfx: {fileID: 2718631986177781051}
+  playerShotDamage: 1
+  enemyShotDamage: 10
+  railDamage: 5
+  enemyShot: 0
+  initialDamageDuration: 0.2
   dir: {x: 0, y: 0, z: 0}
   friendly: 1
   stable: 0
