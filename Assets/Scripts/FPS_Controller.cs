@@ -9,6 +9,7 @@ public class FPS_Controller : MonoBehaviour
     //Serialize Params
     [Header("Player Controls")]
     [SerializeField] bool platformsEnabled;
+    public MouseLook camera;
     public Gun gun;
     public UIManager ui;
     public GameObject meleePlatform, slash;
@@ -28,6 +29,7 @@ public class FPS_Controller : MonoBehaviour
     private Score score;
 
     //State
+    public bool playerInputEnabled = true;
     private Vector3 movement = Vector3.zero, grindDir = Vector3.zero;
     private Vector2 endPos = new Vector2(999, 999);
     private CharacterController controller;
@@ -49,13 +51,28 @@ public class FPS_Controller : MonoBehaviour
     }
 
     #region Input
+    public void TogglePause(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed) { return; }
+        if (!playerInputEnabled) { camera.LockCamera(); camera.LockMouse(); }
+        else { camera.UnlockCamera(); camera.UnlockMouse(); }
+        ui.TogglePauseMenu();
+        playerInputEnabled = !playerInputEnabled;
+    }
+
+
+    
+
     public void Shmoove(InputAction.CallbackContext ctx) {
+        if (!playerInputEnabled) { return; }
+        
         float y = movement.y;
         movement = new Vector3(ctx.ReadValue<Vector2>().x, 0, ctx.ReadValue<Vector2>().y);
         movement.y = y;
     }
     public void Yump(InputAction.CallbackContext ctx) {
-        if(ctx.performed && grounded && pounding) {
+        if (!playerInputEnabled) { return; }
+        if (ctx.performed && grounded && pounding) {
             movement.y = jumpStrength * 2f;
             jumpCount--;
             sfx.RailGrind(false);
@@ -72,8 +89,9 @@ public class FPS_Controller : MonoBehaviour
             grounded = false;
         }
     }
-    public void Shoot(InputAction.CallbackContext ctx) { 
-        if(ctx.performed && canShoot && railCharge >= 1) {
+    public void Shoot(InputAction.CallbackContext ctx) {
+        if (!playerInputEnabled) { return; }
+        if (ctx.performed && canShoot && railCharge >= 1) {
             vfx.SendEvent("OnPlay");
             rightHand.SetTrigger("shoot");
             sfx.Shoot();
@@ -84,6 +102,7 @@ public class FPS_Controller : MonoBehaviour
         else if(railCharge < 1) { sfx.GunEmpty(); }
     }
     public void Melee(InputAction.CallbackContext ctx) {
+        if (!playerInputEnabled) { return; }
         if (ctx.performed && canSlash)
         {
             rightHand.SetTrigger("slash");
@@ -95,6 +114,7 @@ public class FPS_Controller : MonoBehaviour
         }
     }
     public void Platform(InputAction.CallbackContext ctx) {
+        if (!playerInputEnabled) { return; }
         if (ctx.performed && barCharge == 1 && platformsEnabled)
         {
             barCharge = 0;
@@ -105,6 +125,7 @@ public class FPS_Controller : MonoBehaviour
     }
     public void Dash(InputAction.CallbackContext ctx)
     {
+        if (!playerInputEnabled) { return; }
         if (ctx.performed && canDash && dashCharge >= 1) {
             rightHand.SetTrigger("dash");
             leftHand.SetTrigger("dash");
@@ -118,7 +139,8 @@ public class FPS_Controller : MonoBehaviour
     }
     public void Crouch(InputAction.CallbackContext ctx)
     {
-        if((jumpCount < 2 && ctx.performed) || (grinding && ctx.performed)) {
+        if (!playerInputEnabled) { return; }
+        if ((jumpCount < 2 && ctx.performed) || (grinding && ctx.performed)) {
             sfx.RailGrind(false);
             rightHand.SetBool("pound", true);
             grinding = false;

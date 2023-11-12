@@ -13,7 +13,11 @@ public class UIManager : MonoBehaviour
 
     //Serialize Params
     [Header("UI Elements")]
+    [Header("Pause Menu")]
+    [SerializeField] PauseMenu pauseMenu;
+
     [Header("Reticle")]
+    [SerializeField] CanvasGroup reticleUI;
     //[SerializeField] [Range(0,4)]float debugGun;
     //[SerializeField] [Range(0,1)]float debugPlatform;
     [SerializeField] Image crosshair;
@@ -23,6 +27,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] List<Image> gunCharges;
     [SerializeField] public Image gunSlider;
     [Header("Score")]
+    [SerializeField] CanvasGroup scoreUI;
     [SerializeField] GameObject newPointsPrefab;
     [SerializeField] TextMeshProUGUI score;
     [SerializeField] TextMeshProUGUI scoreBG;
@@ -31,11 +36,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] VerticalLayoutGroup verticalLayerGroup;
     [SerializeField] float pointsTime;
     [Header("Objectives")]
+    [SerializeField] CanvasGroup objectivesUI;
     [SerializeField] TextMeshProUGUI objectiveMain;
     [SerializeField] TextMeshProUGUI objectiveBonus;
     [SerializeField] TextMeshProUGUI bonusPoints;
     [SerializeField] TextMeshProUGUI bonusTracker;
     [Header("Health")]
+    [SerializeField] CanvasGroup healthUI;
     [SerializeField] float healthPicChangeThreshhold = 25;
     [SerializeField] Image healthBG;
     [SerializeField] List<Sprite> healthBGs;
@@ -55,7 +62,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] Image winScreen;
     [Header("Debug")]
     [SerializeField] float debugHealth = 100f;
+
     //State
+    bool gamePaused = false;
+
     List<GameObject> pointsWaitingList = new List<GameObject>();
     float health = 100;
     float redHealth = 100;
@@ -73,6 +83,28 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(7);
         FindObjectOfType<SceneLoader>().ReloadLevel();
 
+    }
+
+    public void TogglePauseMenu()
+    {
+        Debug.Log("ui debug togglepausemenu");
+        if (!gamePaused)
+        {
+            pauseMenu.Pause();
+            scoreUI.gameObject.SetActive(false);
+            reticleUI.gameObject.SetActive(false);
+            healthUI.gameObject.SetActive(false);
+            objectivesUI.gameObject.SetActive(false);
+        }
+        else
+        {
+            pauseMenu.Unpause();
+            scoreUI.gameObject.SetActive(true);
+            reticleUI.gameObject.SetActive(true);
+            healthUI.gameObject.SetActive(true);
+            objectivesUI.gameObject.SetActive(true);
+        }
+        gamePaused = !gamePaused;
     }
 
     public void ShowWin()
